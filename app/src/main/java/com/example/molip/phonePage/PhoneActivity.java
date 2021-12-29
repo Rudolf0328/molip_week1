@@ -3,7 +3,10 @@ package com.example.molip.phonePage;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import com.example.molip.phonePage.adapter.PhoneRcvAdapter;
 import com.example.molip.phonePage.data.DummyData;
 import com.example.molip.phonePage.data.PhoneData;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 //외부에서 new Frag1 호출 시
@@ -44,24 +48,33 @@ public class PhoneActivity extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent add = new Intent(getActivity(), UpdateActivity.class);
-                add.putExtra("position", -1);
-                startActivityForResult(add, Manager.RC_CA_TO_UPDATE);
+                Intent add = new Intent(Intent.ACTION_PICK);
+                add.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                startActivityForResult(add, 0);
             }
         });
         return v;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Manager.RC_CA_TO_DETAIL) {
-            if (resultCode == RESULT_OK) {
-                rcvAdapter.notifyDataSetChanged();
-            }
-        } else if (requestCode == Manager.RC_CA_TO_UPDATE) {
-            if (resultCode == RESULT_OK) {
-                rcvAdapter.notifyDataSetChanged();
-            }
+        String sName = "error";
+        String sNumber = "error";
+        String sImage = "error";
+        String sPerson = "error";
+
+        if (resultCode == RESULT_OK) {
+            Cursor cursor = getActivity().getContentResolver().query(data.getData(), new String[]{ContactsContract.Contacts._ID, ContactsContract.Contacts.PHOTO_ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER}, null, null, null);
+            cursor.moveToFirst();
+            sPerson = cursor.getString(0);
+            sImage = cursor.getString(1);
+            sName = cursor.getString(2);
+            sNumber = cursor.getString(3);
+            cursor.close();
         }
+        System.out.println("image: " + sImage);
+        DummyData.dummyList.add(new PhoneData(sImage, sName, sNumber));
+        rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
+        rcvPhones.setAdapter(rcvAdapter);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
