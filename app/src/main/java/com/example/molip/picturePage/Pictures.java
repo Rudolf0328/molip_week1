@@ -1,4 +1,4 @@
-package com.example.molip;
+package com.example.molip.picturePage;
 
 import android.content.ClipData;
 import android.content.Intent;
@@ -14,20 +14,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.molip.R;
+
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Pictures extends Fragment {
     ImageView imageView;
     Button button;
-
+    PictureRcvAdapter picadapter;
+    RecyclerView rcvpictures;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup imgview = (ViewGroup) inflater.inflate(R.layout.pictures, container, false);
         imageView = (ImageView) imgview.findViewById(R.id.image);
-
+        rcvpictures = (RecyclerView) imgview.findViewById(R.id.tab2_rcv);
         button = (Button) imgview.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +48,7 @@ public class Pictures extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
         if (requestCode == 1) {
-            List<Bitmap> bitmaps = new ArrayList<>();
+            ArrayList<Bitmap> bitmaps = new ArrayList<>();
             ClipData clipdata = data.getClipData();
             // Make sure the request was successful
             if (clipdata != null) {
@@ -56,7 +60,7 @@ public class Pictures extends Fragment {
                         InputStream inputStream = getActivity().getContentResolver().openInputStream(imageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         bitmaps.add(bitmap);
-                    } catch (Exception e) {
+                    } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                 }
@@ -68,30 +72,32 @@ public class Pictures extends Fragment {
                     InputStream inputStream = getActivity().getContentResolver().openInputStream(imageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                     bitmaps.add(bitmap);
-                } catch (Exception e) {
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
 
             }
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    for (final Bitmap b : bitmaps) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                imageView.setImageBitmap(b);
-                            }
-                        });
-
-                        try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }).start();
+            picadapter = new PictureRcvAdapter(bitmaps, getActivity());
+            rcvpictures.setAdapter(picadapter);
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    for (final Bitmap b : bitmaps) {
+//                        getActivity().runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                imageView.setImageBitmap(b);
+//                            }
+//                        });
+//
+//                        try {
+//                            Thread.sleep(3000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+//            }).start();
 //            if (resultCode == RESULT_OK) {
 //                try {
 //                    // 선택한 이미지에서 비트맵 생성
