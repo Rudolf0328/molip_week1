@@ -11,7 +11,7 @@
         android:id="@+id/tab2_rcv"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
-        android:layout_height="653dp" />
+        android:layout_height="300dp" />
 
     <Button
         android:id="@+id/button"

@@ -75,9 +75,16 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
 
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final PhoneData phoneData = phoneList.get(position);
-
+        System.out.println("pd: " + phoneData);
         holder.tvName.setText(phoneData.getName());
-        holder.imgProfile.setImageURI(Uri.parse(phoneData.getProfileRes()));
+        if(phoneData.getProfileRes().equals("null")) {
+            int resourceId = R.drawable.puppy;
+            holder.imgProfile.setImageResource(resourceId);
+        } else {
+            holder.imgProfile.setImageURI(Uri.parse(phoneData.getProfileRes()));
+        }
+
+        System.out.println("img: " + phoneData.getProfileRes());
 
         holder.btnCall.setOnClickListener(new View.OnClickListener() {
             @Override

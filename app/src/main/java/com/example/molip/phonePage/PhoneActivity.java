@@ -83,10 +83,16 @@ public class PhoneActivity extends Fragment {
             sNumber = cursor.getString(2);
             cursor.close();
         }
-        System.out.println("image: " + sImage);
-        DummyData.dummyList.add(new PhoneData(sImage, sName, sNumber));
-        rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
-        rcvPhones.setAdapter(rcvAdapter);
+        if (!sName.equals("error") && !sNumber.equals("error")) {
+            if (sImage == null) {
+                sImage = "null";
+            }
+            System.out.println("image: " + sImage);
+            DummyData.dummyList.add(new PhoneData(sImage, sName, sNumber));
+            rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
+            rcvPhones.setAdapter(rcvAdapter);
+        }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
