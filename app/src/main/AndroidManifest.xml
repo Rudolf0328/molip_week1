@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Molip">
         <activity
+            android:name=".phonePage.UpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".phonePage.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".phonePage.PhoneActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
