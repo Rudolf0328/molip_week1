@@ -1,11 +1,23 @@
 package com.example.molip.phonePage.adapter;
 
+import static androidx.core.app.ActivityCompat.requestPermissions;
+
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +25,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.example.molip.R;
 import com.example.molip.phonePage.DetailActivity;
 import com.example.molip.phonePage.Manager;
+import com.example.molip.phonePage.PhoneActivity;
 import com.example.molip.phonePage.data.PhoneData;
 
 import java.util.ArrayList;
@@ -28,6 +43,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
     private ArrayList<PhoneData> phoneList;
     private Context context;
     public PhoneRcvAdapter(ArrayList<PhoneData> phoneList, Context context) {
+        System.out.println(phoneList);
         this.phoneList = phoneList;
         this.context = context;
     }
@@ -61,7 +77,8 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
         final PhoneData phoneData = phoneList.get(position);
 
         holder.tvName.setText(phoneData.getName());
-        holder.imgProfile.setImageAlpha(Manager.getDrawableResId(phoneData.getProfileRes()));
+        holder.imgProfile.setImageURI(Uri.parse(phoneData.getProfileRes()));
+
         holder.btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,4 +144,55 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, phoneList.size());
     }
+
+    public Bitmap loadContactPhoto(ContentResolver cr, long id, long photo_id) {
+        byte[] photoBytes = null;
+        Uri photoUri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, photo_id);
+        Cursor c = cr.query(photoUri, new String[]{ContactsContract.CommonDataKinds.Photo.PHOTO}, null, null, null);
+        try {
+            if (c.moveToFirst())
+                photoBytes = c.getBlob(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            c.close();
+        }
+
+        if(photoBytes != null) {
+            return resizingBitmap(BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.length));
+        } else
+            Log.d("PHOTO", "fail");
+
+        return null;
+    }
+
+    public Bitmap resizingBitmap(Bitmap oBitmap) {
+        if (oBitmap == null) {
+            return null;
+        }
+
+        float width = oBitmap.getWidth();
+        float height = oBitmap.getHeight();
+        float resizing_size = 120;
+
+        Bitmap rBitmap = null;
+        if (width > resizing_size) {
+            float mWidth = (float) (width / 100);
+            float fScale = (float) (resizing_size / mWidth);
+            width *= (fScale / 100);
+            height *= (fScale / 100);
+        } else if (height > resizing_size){
+            float mHeight = (float) (height / 100);
+            float fScale = (float) (resizing_size / mHeight);
+
+            width *= (fScale / 100);
+            height *= (fScale / 100);
+        }
+
+        rBitmap = Bitmap.createScaledBitmap(oBitmap, (int) width, (int) height, true);
+        return rBitmap;
+    }
+
+
+
 }
