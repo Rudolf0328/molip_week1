@@ -1,58 +1,42 @@
 package com.example.molip;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    FragmentManager manager;
-    FragmentTransaction ft;
+import android.os.Bundle;
 
-    Phone phone;
-    Pictures pictures;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
+
+public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "Main_Activity";
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        manager = getSupportFragmentManager();
+        tabLayout=findViewById(R.id.tabs);
+        viewPager=findViewById(R.id.view_pager);
+        adapter=new Adapter(getSupportFragmentManager(),1);
 
-        Button phoneTab = findViewById(R.id.one);
-        Button picturesTab = findViewById(R.id.two);
+        //FragmentAdapter에 컬렉션 담기
+        adapter.addFragment(new Phone());
+        adapter.addFragment(new Pictures());
+//        adapter.addFragment(new Frag3());
 
-        phone = new Phone();
-        pictures = new Pictures();
+        //ViewPager Fragment 연결
+        viewPager.setAdapter(adapter);
 
-        ft = manager.beginTransaction();
-        ft.add(R.id.fragment_container, phone);
-        ft.addToBackStack(null);
-        ft.commit();
+        //ViewPager과 TabLayout 연결
+        tabLayout.setupWithViewPager(viewPager);
 
-        phoneTab.setOnClickListener(this);
-        picturesTab.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        ft = manager.beginTransaction();
-
-        int id = v.getId();
-        switch (id) {
-            case R.id.one:
-                ft.replace(R.id.fragment_container, phone);
-                ft.commit();
-                break;
-            case R.id.two:
-                ft.replace(R.id.fragment_container, pictures);
-                ft.commit();
-                break;
-            default:
-                break;
-        }
+        tabLayout.getTabAt(0).setText("첫 번째");
+        tabLayout.getTabAt(1).setText("두 번째");
+//        tabLayout.getTabAt(2).setText("세 번째");
     }
 }
