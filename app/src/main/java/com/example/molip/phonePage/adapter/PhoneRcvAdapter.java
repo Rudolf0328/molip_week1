@@ -61,7 +61,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgProfile;
         ImageButton btnCall, btnMsg;
-        TextView tvName;
+        TextView tvName, tvPhoneNum;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -69,7 +69,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
             btnCall = (ImageButton) itemView.findViewById(R.id.item_btn_call);
             btnMsg = (ImageButton) itemView.findViewById(R.id.item_btn_msg);
             tvName = (TextView) itemView.findViewById(R.id.item_tv_name);
-
+            tvPhoneNum = (TextView) itemView.findViewById(R.id.item_tv_phone_num);
         }
     }
 
@@ -77,6 +77,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
         final PhoneData phoneData = phoneList.get(position);
         System.out.println("pd: " + phoneData);
         holder.tvName.setText(phoneData.getName());
+        holder.tvPhoneNum.setText(phoneData.getPhoneNum());
         if(phoneData.getProfileRes().equals("null")) {
             int resourceId = R.drawable.puppy;
             holder.imgProfile.setImageResource(resourceId);

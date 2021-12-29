@@ -16,11 +16,27 @@
             android:layout_height="60dp"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/item_tv_name"
-            android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:text="Name" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_tv_name"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/item_tv_phone_num"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="TextView" />
+        </LinearLayout>
 
         <ImageButton
             android:id="@+id/item_btn_call"
