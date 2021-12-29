@@ -5,7 +5,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.google.android.material.tabs.TabItem;
+import com.example.molip.phonePage.PhoneActivity;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         adapter=new Adapter(getSupportFragmentManager(),1);
 
         //FragmentAdapter에 컬렉션 담기
-        adapter.addFragment(new Phone());
+        adapter.addFragment(new PhoneActivity());
         adapter.addFragment(new Pictures());
 //        adapter.addFragment(new Frag3());
 
