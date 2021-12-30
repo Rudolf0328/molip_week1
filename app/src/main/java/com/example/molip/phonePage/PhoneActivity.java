@@ -53,10 +53,14 @@ public class PhoneActivity extends Fragment {
             }
 
         });
+
         btnNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addNew = new Intent(Intent.ACTION_PICK);
+                Intent addNew = new Intent(getActivity(), UpdateActivity.class);
+                addNew.putExtra("name", "");
+                addNew.putExtra("phone", "");
+                addNew.putExtra("profile", "");
                 Objects.requireNonNull(getActivity()).startActivityForResult(addNew, Manager.RC_CA_TO_UPDATE);
             }
         });
