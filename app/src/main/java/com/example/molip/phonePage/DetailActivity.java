@@ -1,31 +1,16 @@
 package com.example.molip.phonePage;
 
-import static android.app.Activity.RESULT_OK;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.molip.R;
-import com.example.molip.phonePage.adapter.PhoneRcvAdapter;
-import com.example.molip.phonePage.data.DummyData;
-import com.example.molip.phonePage.data.PhoneData;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -50,11 +35,12 @@ public class DetailActivity extends AppCompatActivity {
 
         ImageView imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
         TextView tvName = (TextView) findViewById(R.id.detail_tv_name), tvPhone = (TextView) findViewById(R.id.detail_tv_phone);
+        ImageButton imgBtnEdit = (ImageButton) findViewById(R.id.update_img_btn_check);
         Intent intent = getIntent();
 
         String profile = intent.getStringExtra("profile");
-//        String name = intent.getStringExtra("name");
-//        String phone = intent.getStringExtra("phone");
+        String name = intent.getStringExtra("name");
+        String phone = intent.getStringExtra("phone");
         System.out.println(profile);
         try {
             imgvProfile.setClipToOutline(true);
@@ -82,15 +68,17 @@ public class DetailActivity extends AppCompatActivity {
 //        rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
 //        rcvPhones.setAdapter(rcvAdapter);
 //        checkPermission();
-//        btnAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent add = new Intent(Intent.ACTION_PICK);
-//                add.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-//                startActivityForResult(add, 0);
-//            }
-//
-//        });
+        imgBtnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(DetailActivity.this, UpdateActivity.class);
+                edit.putExtra("name", name);
+                edit.putExtra("phone", phone);
+                edit.putExtra("profile", profile);
+                startActivityForResult(edit, Manager.RC_CA_TO_UPDATE);
+            }
+
+        });
 //        return v;
     }
 
