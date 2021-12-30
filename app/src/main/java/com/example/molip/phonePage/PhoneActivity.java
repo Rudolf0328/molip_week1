@@ -2,26 +2,18 @@ package com.example.molip.phonePage;
 
 import static android.app.Activity.RESULT_OK;
 
-import static androidx.core.app.ActivityCompat.requestPermissions;
-import static androidx.core.content.PermissionChecker.checkCallingOrSelfPermission;
-
-import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,14 +23,13 @@ import com.example.molip.phonePage.adapter.PhoneRcvAdapter;
 import com.example.molip.phonePage.data.DummyData;
 import com.example.molip.phonePage.data.PhoneData;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.Objects;
 
 //외부에서 new Frag1 호출 시
 public class PhoneActivity extends Fragment {
 //    private FragmentHomeBinding binding;
     RecyclerView rcvPhones;
-    ImageButton btnAdd;
+    ImageButton btnAdd, btnNew;
     PhoneRcvAdapter rcvAdapter;
 
     @Nullable
@@ -48,6 +39,7 @@ public class PhoneActivity extends Fragment {
         ViewGroup v = (ViewGroup) inflater.inflate(R.layout.activity_phone,container,false);
         rcvPhones = (RecyclerView) v.findViewById(R.id.phone_list);
         btnAdd = (ImageButton) v.findViewById(R.id.phone_btn_add);
+        btnNew = (ImageButton) v.findViewById(R.id.phone_btn_new);
         rcvPhones.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
         rcvPhones.setAdapter(rcvAdapter);
@@ -60,6 +52,17 @@ public class PhoneActivity extends Fragment {
                 startActivityForResult(add, 0);
             }
 
+        });
+
+        btnNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addNew = new Intent(getActivity(), UpdateActivity.class);
+                addNew.putExtra("name", "");
+                addNew.putExtra("phone", "");
+                addNew.putExtra("profile", "");
+                Objects.requireNonNull(getActivity()).startActivityForResult(addNew, Manager.RC_CA_TO_UPDATE);
+            }
         });
         return v;
     }
