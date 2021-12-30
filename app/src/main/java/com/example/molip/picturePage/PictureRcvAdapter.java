@@ -1,27 +1,21 @@
 package com.example.molip.picturePage;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.graphics.Bitmap;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.example.molip.R;
-import com.example.molip.phonePage.DetailActivity;
-import com.example.molip.phonePage.Manager;
-import com.example.molip.phonePage.data.PhoneData;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.ViewHolder> {
@@ -73,18 +67,14 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
+                Intent intent = new Intent(context, ImageDetail.class);
                 intent.putExtra("position", position);
-                ((Activity)context).startActivityForResult(intent, Manager.RC_CA_TO_DETAIL);
-            }
-        });
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("position", position);
-                ((Activity)context).startActivityForResult(intent, Manager.RC_CA_TO_DETAIL);
+                //intent.putExtra("image", imageData);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                imageData.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                intent.putExtra("image",byteArray);
+                ((Activity)context).startActivityForResult(intent, PictureManager.RQ_PIC_TO_DETAIL);
             }
         });
 
