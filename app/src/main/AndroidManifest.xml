@@ -19,6 +19,9 @@
             android:name=".phonePage.PhoneActivity"
             android:exported="false" />
         <activity
+            android:name=".picturePage.ImageDetail"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

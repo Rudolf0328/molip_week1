@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:context=".picturePage.ImageDetail">
 
     <ImageView
-        android:id="@+id/tab2_image"
+        android:id="@+id/imageView"
+        tools:ignore="MissingConstraints"
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="-4dp"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
