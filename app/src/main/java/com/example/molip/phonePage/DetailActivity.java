@@ -27,42 +27,54 @@ import com.example.molip.phonePage.adapter.PhoneRcvAdapter;
 import com.example.molip.phonePage.data.DummyData;
 import com.example.molip.phonePage.data.PhoneData;
 
-public class DetailActivity extends Fragment {
+public class DetailActivity extends AppCompatActivity {
+
+//        final int position = 0;
+//        ViewGroup v = (ViewGroup) inflate(R.layout.activity_detail,container,false);
+
     //    private FragmentHomeBinding binding;
 //    RecyclerView rcvPhones;
 //    ImageButton btnAdd;
 //    PhoneRcvAdapter rcvAdapter;
-    ImageView imgvProfile;
-    TextView tvName, tvPhone;
+//    Context context = this;
 //    private Context context;
 //
 //    public DetailActivity(Context context) {
 //        this.context = context;
 //    }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Intent intent = getActivity().getIntent();
-
-//        final int position = 0;
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewGroup v = (ViewGroup) inflater.inflate(R.layout.activity_detail,container,false);
+        setContentView(R.layout.activity_detail);
 
-        imgvProfile = (ImageView) v.findViewById(R.id.item_imgv_profile);
-        tvName = (TextView) v.findViewById(R.id.detail_tv_name);
-        tvPhone = (TextView) v.findViewById(R.id.detail_tv_phone);
+        ImageView imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
+        TextView tvName = (TextView) findViewById(R.id.detail_tv_name), tvPhone = (TextView) findViewById(R.id.detail_tv_phone);
+        Intent intent = getIntent();
 
         String profile = intent.getStringExtra("profile");
-        int defaultProfile = R.drawable.img_default;
+//        String name = intent.getStringExtra("name");
+//        String phone = intent.getStringExtra("phone");
+        System.out.println(profile);
+        try {
+            imgvProfile.setClipToOutline(true);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-        tvName.setText(intent.getStringExtra("name"));
-        tvPhone.setText(intent.getStringExtra("phone"));
+        try {
 
-        if (profile.equals("null")) {
-            imgvProfile.setImageResource(defaultProfile);
-        } else {
-            imgvProfile.setImageURI(Uri.parse(profile));
+            tvName.setText(intent.getStringExtra("name"));
+            tvPhone.setText(intent.getStringExtra("phone"));
+
+            if (profile.equals("null")) {
+                int defaultProfile = R.drawable.img_default;
+                imgvProfile.setImageResource(defaultProfile);
+            } else {
+                imgvProfile.setImageURI(Uri.parse(profile));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
 //        rcvPhones = (RecyclerView) v.findViewById(R.id.phone_list);
 //        btnAdd = (ImageButton) v.findViewById(R.id.phone_btn_add);
@@ -79,7 +91,7 @@ public class DetailActivity extends Fragment {
 //            }
 //
 //        });
-        return v;
+//        return v;
     }
 
 //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
