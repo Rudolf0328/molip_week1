@@ -10,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tab2_rcv"
         android:layout_width="wrap_content"
-        android:layout_height="653dp"
+        android:layout_height="500dp"
         android:layout_marginLeft="40dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
