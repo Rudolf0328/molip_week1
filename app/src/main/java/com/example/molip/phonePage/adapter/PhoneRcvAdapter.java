@@ -114,7 +114,8 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
 //                DetailActivity detailActivity = new DetailActivity();
 //                ft.replace(Manager.RC_CA_TO_DETAIL, detailActivity);
 //                ft.commit();
-                Intent intent = new Intent(context, MainActivity.class);
+//                activity.get
+                Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("position", position);
                 intent.putExtra("name", phoneData.getName());
                 intent.putExtra("phone", phoneData.getPhoneNum());
