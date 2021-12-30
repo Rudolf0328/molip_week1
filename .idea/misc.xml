@@ -3,13 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<<<< Temporary merge branch 1
         <entry key="../../../../layout/custom_preview.xml" value="0.1640625" />
-=========
         <entry key="..\:/molip_week1/app/src/main/res/layout/activity_main.xml" value="0.19927536231884058" />
         <entry key="..\:/molip_week1/app/src/main/res/layout/phone.xml" value="0.19927536231884058" />
         <entry key="..\:/molip_week1/app/src/main/res/layout/pictures.xml" value="0.2" />
->>>>>>>>> Temporary merge branch 2
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2821557971014493" />
         <entry key="app/src/main/res/layout/activity_phone.xml" value="0.20785188563675844" />
         <entry key="app/src/main/res/layout/activity_update.xml" value="0.1" />

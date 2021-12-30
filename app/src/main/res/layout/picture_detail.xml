@@ -6,11 +6,11 @@
     android:layout_height="wrap_content"
     tools:context=".picturePage.ImageDetail">
 
-    <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/imageView"
         tools:ignore="MissingConstraints"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         tools:layout_editor_absoluteX="-2dp"
