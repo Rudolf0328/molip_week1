@@ -28,9 +28,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import com.example.molip.MainActivity;
 import com.example.molip.R;
 import com.example.molip.phonePage.DetailActivity;
 import com.example.molip.phonePage.Manager;
@@ -79,7 +82,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
         holder.tvName.setText(phoneData.getName());
         holder.tvPhoneNum.setText(phoneData.getPhoneNum());
         if(phoneData.getProfileRes().equals("null")) {
-            int resourceId = R.drawable.puppy;
+            int resourceId = R.drawable.img_default;
             holder.imgProfile.setImageResource(resourceId);
         } else {
             holder.imgProfile.setImageURI(Uri.parse(phoneData.getProfileRes()));
@@ -106,17 +109,16 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
+//                FragmentManager fm = ;
+//                FragmentTransaction ft = fm.beginTransaction();
+//                DetailActivity detailActivity = new DetailActivity();
+//                ft.replace(Manager.RC_CA_TO_DETAIL, detailActivity);
+//                ft.commit();
+                Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("position", position);
-                ((Activity)context).startActivityForResult(intent, Manager.RC_CA_TO_DETAIL);
-            }
-        });
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("position", position);
+                intent.putExtra("name", phoneData.getName());
+                intent.putExtra("phone", phoneData.getPhoneNum());
+                intent.putExtra("profile", phoneData.getProfileRes());
                 ((Activity)context).startActivityForResult(intent, Manager.RC_CA_TO_DETAIL);
             }
         });
