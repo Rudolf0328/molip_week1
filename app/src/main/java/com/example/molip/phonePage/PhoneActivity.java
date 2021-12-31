@@ -2,18 +2,26 @@ package com.example.molip.phonePage;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.app.Activity;
+import static androidx.core.app.ActivityCompat.requestPermissions;
+import static androidx.core.content.PermissionChecker.checkCallingOrSelfPermission;
+
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,13 +31,14 @@ import com.example.molip.phonePage.adapter.PhoneRcvAdapter;
 import com.example.molip.phonePage.data.DummyData;
 import com.example.molip.phonePage.data.PhoneData;
 
-import java.util.Objects;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 //외부에서 new Frag1 호출 시
 public class PhoneActivity extends Fragment {
 //    private FragmentHomeBinding binding;
     RecyclerView rcvPhones;
-    ImageButton btnAdd, btnNew;
+    ImageButton btnAdd;
     PhoneRcvAdapter rcvAdapter;
 
     @Nullable
@@ -37,9 +46,17 @@ public class PhoneActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewGroup v = (ViewGroup) inflater.inflate(R.layout.activity_phone,container,false);
+        try {
+            String newName = getArguments().getString("newName");
+            String newPhone = getArguments().getString("newPhone");
+            String newProfile = getArguments().getString("newProfile");
+
+            DummyData.dummyList.add(new PhoneData(newProfile, newName, newPhone));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         rcvPhones = (RecyclerView) v.findViewById(R.id.phone_list);
         btnAdd = (ImageButton) v.findViewById(R.id.phone_btn_add);
-        btnNew = (ImageButton) v.findViewById(R.id.phone_btn_new);
         rcvPhones.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
         rcvPhones.setAdapter(rcvAdapter);
@@ -53,10 +70,13 @@ public class PhoneActivity extends Fragment {
             }
 
         });
+<<<<<<<<< Temporary merge branch 1
+=========
 
         btnNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                getActivity().getSupportFragmentManager().beginTransaction().replace().commit();
                 Intent addNew = new Intent(getActivity(), UpdateActivity.class);
                 addNew.putExtra("name", "");
                 addNew.putExtra("phone", "");
@@ -64,6 +84,7 @@ public class PhoneActivity extends Fragment {
                 Objects.requireNonNull(getActivity()).startActivityForResult(addNew, Manager.RC_CA_TO_UPDATE);
             }
         });
+>>>>>>>>> Temporary merge branch 2
         return v;
     }
 
