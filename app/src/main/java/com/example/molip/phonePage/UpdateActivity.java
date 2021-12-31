@@ -1,5 +1,6 @@
 package com.example.molip.phonePage;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.molip.MainActivity;
 import com.example.molip.R;
@@ -55,6 +57,10 @@ public class UpdateActivity extends AppCompatActivity {
 
         try {
 
+//            tvName.setText(intent.getStringExtra("name"));
+//            tvPhone.setText(intent.getStringExtra("phone"));
+
+            if (profile.equals("null")) {
             if (profile.equals("")) {
                 int defaultProfile = R.drawable.img_default;
                 imgvProfile.setImageResource(defaultProfile);

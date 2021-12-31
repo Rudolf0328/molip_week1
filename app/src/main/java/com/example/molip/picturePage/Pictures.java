@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
@@ -24,15 +24,18 @@ import java.util.ArrayList;
 
 public class Pictures extends Fragment {
     ImageView imageView;
-    Button button;
+    ImageButton button;
+    ImageButton button2;
     PictureRcvAdapter picadapter;
     RecyclerView rcvpictures;
+    ArrayList<Bitmap> bitmaps = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup imgview = (ViewGroup) inflater.inflate(R.layout.pictures, container, false);
         imageView = (ImageView) imgview.findViewById(R.id.image);
         rcvpictures = (RecyclerView) imgview.findViewById(R.id.tab2_rcv);
-        button = (Button) imgview.findViewById(R.id.button);
+        button = (ImageButton) imgview.findViewById(R.id.button);
+        button2 = (ImageButton) imgview.findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,12 +46,19 @@ public class Pictures extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), PhotoActivity.class);
+                startActivity(intent);
+            }
+        });
         return imgview;
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
         if (requestCode == 1) {
-            ArrayList<Bitmap> bitmaps = new ArrayList<>();
+//            ArrayList<Bitmap> bitmaps = new ArrayList<>();
             ClipData clipdata = data.getClipData();
             // Make sure the request was successful
             if (clipdata != null) {
