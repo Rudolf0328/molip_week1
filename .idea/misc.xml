@@ -4,6 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1640625" />
+        <entry key="..\:/molip_week1/app/src/main/res/layout/activity_camera.xml" value="0.2368659420289855" />
+        <entry key="..\:/molip_week1/app/src/main/res/layout/activity_main.xml" value="0.19927536231884058" />
+        <entry key="..\:/molip_week1/app/src/main/res/layout/activity_phone.xml" value="0.17806484295845998" />
+        <entry key="..\:/molip_week1/app/src/main/res/layout/activity_update.xml" value="0.17806484295845998" />
+        <entry key="..\:/molip_week1/app/src/main/res/layout/phone.xml" value="0.19927536231884058" />
+        <entry key="..\:/molip_week1/app/src/main/res/layout/phone_item.xml" value="0.17806484295845998" />
+        <entry key="..\:/molip_week1/app/src/main/res/layout/picture_detail.xml" value="0.11458333333333333" />
+        <entry key="..\:/molip_week1/app/src/main/res/layout/picture_item.xml" value="0.25364583333333335" />
+        <entry key="..\:/molip_week1/app/src/main/res/layout/pictures.xml" value="0.2" />
+        <entry key="..\:/molip_week1/app/src/main/res/xml/file_paths.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/drawable/round_background_border_black.xml" value="0.2496019408115059" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.5931646028661106" />
