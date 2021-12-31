@@ -3,6 +3,7 @@ package com.example.molip.phonePage;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,12 +13,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.molip.MainActivity;
 import com.example.molip.R;
+import com.example.molip.phonePage.data.Contact;
+import com.example.molip.phonePage.data.ContactDB;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.zip.Inflater;
 
 public class UpdateActivity extends AppCompatActivity {
+
+    private ContactDB contactDB = null;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,7 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
 
         PhoneActivity phoneActivity = new PhoneActivity();
+        contactDB = ContactDB.getInstance(this);
 
         ImageView imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
         EditText etName = (EditText) findViewById(R.id.update_et_name);
@@ -60,10 +68,13 @@ public class UpdateActivity extends AppCompatActivity {
         imgBtnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newName = etName.getText().toString();
-                String newPhone = etPhone.getText().toString();
+                Contact contact = new Contact();
+                contact.name = etName.getText().toString();
+                contact.phone = etPhone.getText().toString();
+                ContactDB.getInstance(context).contactDAO().insert(contact);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.container, phoneActivity).commit();
+//                Intent intent = new Intent(this, MainActivity.class);
             }
         });
     }
