@@ -3,6 +3,7 @@ package com.example.molip.phonePage;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -20,9 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.molip.R;
 import com.example.molip.phonePage.adapter.PhoneRcvAdapter;
+import com.example.molip.phonePage.data.Contact;
+import com.example.molip.phonePage.data.ContactDB;
 import com.example.molip.phonePage.data.DummyData;
 import com.example.molip.phonePage.data.PhoneData;
 
+import java.util.List;
 import java.util.Objects;
 
 //외부에서 new Frag1 호출 시
@@ -31,26 +35,53 @@ public class PhoneActivity extends Fragment {
     RecyclerView rcvPhones;
     ImageButton btnAdd, btnNew;
     PhoneRcvAdapter rcvAdapter;
+    ContactDB contactDB = null;
+    List<Contact> contactList;
+    Context context;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewGroup v = (ViewGroup) inflater.inflate(R.layout.activity_phone,container,false);
-        try {
-            String newName = getArguments().getString("newName");
-            String newPhone = getArguments().getString("newPhone");
-            String newProfile = getArguments().getString("newProfile");
 
-            DummyData.dummyList.add(new PhoneData(newProfile, newName, newPhone));
+        try {
+            contactDB = ContactDB.getInstance(context);
         } catch (Exception e) {
             System.out.println(e);
         }
+//        Contact contact = new Contact();
+//
+//        try {
+//            String newName = getArguments().getString("newName");
+//            String newPhone = getArguments().getString("newPhone");
+//            String newProfile = getArguments().getString("newProfile");
+//
+//            contact.pname = newName;
+//            contact.phone = newPhone;
+//            contact.profile = newProfile;
+//
+//            // TODO : convert dummylist to room
+//            ContactDB.getInstance(context).contactDao().insert(contact);
+////            DummyData.dummyList.add(new PhoneData(newProfile, newName, newPhone));
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+
+        try {
+            contactList = ContactDB.getInstance(context).contactDao().getAll();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.out.println(contactList);
+
+
         rcvPhones = (RecyclerView) v.findViewById(R.id.phone_list);
         btnAdd = (ImageButton) v.findViewById(R.id.phone_btn_add);
         btnNew = (ImageButton) v.findViewById(R.id.phone_btn_new);
         rcvPhones.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
+        // TODO : convert dummylist to room
+        rcvAdapter = new PhoneRcvAdapter(contactList, getActivity());
         rcvPhones.setAdapter(rcvAdapter);
 //        checkPermission();
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +112,7 @@ public class PhoneActivity extends Fragment {
         String sName = "error";
         String sNumber = "error";
         String sImage = "error";
+        Contact newContact = new Contact();
 //        String sPerson = "error";
 
         if (resultCode == RESULT_OK) {
@@ -96,9 +128,24 @@ public class PhoneActivity extends Fragment {
                 sImage = "null";
             }
             System.out.println("image: " + sImage);
-            DummyData.dummyList.add(new PhoneData(sImage, sName, sNumber));
-            rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
-            rcvPhones.setAdapter(rcvAdapter);
+
+            newContact.pname = sName;
+            newContact.phone = sNumber;
+            newContact.profile = sImage;
+
+            System.out.println(newContact);
+
+            // TODO : convert dummylist to room
+            try {
+                ContactDB.getInstance(getActivity()).contactDao().insert(newContact);
+                contactList = ContactDB.getInstance(getActivity()).contactDao().getAll();
+                System.out.println(contactList);
+//            DummyData.dummyList.add(new PhoneData(sImage, sName, sNumber));
+                rcvAdapter = new PhoneRcvAdapter(contactList, getActivity());
+                rcvPhones.setAdapter(rcvAdapter);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
 
         super.onActivityResult(requestCode, resultCode, data);
