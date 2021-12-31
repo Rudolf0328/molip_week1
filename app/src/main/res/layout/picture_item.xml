@@ -7,8 +7,9 @@
 
     <ImageView
         android:id="@+id/tab2_image"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
+        android:padding="20dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         tools:ignore="MissingConstraints"

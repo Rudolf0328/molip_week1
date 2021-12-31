@@ -1,13 +1,12 @@
 package com.example.molip.phonePage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.molip.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -37,8 +36,8 @@ public class UpdateActivity extends AppCompatActivity {
 
         try {
 
-            tvName.setText(intent.getStringExtra("name"));
-            tvPhone.setText(intent.getStringExtra("phone"));
+//            tvName.setText(intent.getStringExtra("name"));
+//            tvPhone.setText(intent.getStringExtra("phone"));
 
             if (profile.equals("null")) {
                 int defaultProfile = R.drawable.img_default;
