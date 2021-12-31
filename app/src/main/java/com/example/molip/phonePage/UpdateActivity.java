@@ -1,16 +1,21 @@
 package com.example.molip.phonePage;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.molip.R;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.zip.Inflater;
 
 public class UpdateActivity extends AppCompatActivity {
 
@@ -19,15 +24,20 @@ public class UpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
+        PhoneActivity phoneActivity = new PhoneActivity();
+
         ImageView imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
-        TextInputEditText tietName = (TextInputEditText) findViewById(R.id.update_til_name);
-        TextInputEditText tietPhone = (TextInputEditText) findViewById(R.id.update_til_phone);
+        EditText etName = (EditText) findViewById(R.id.update_et_name);
+        EditText etPhone = (EditText) findViewById(R.id.update_et_phone);
         ImageButton imgBtnCheck = (ImageButton) findViewById(R.id.update_img_btn_check);
         Intent intent = getIntent();
 
         String profile = intent.getStringExtra("profile");
         String name = intent.getStringExtra("name");
         String phone = intent.getStringExtra("phone");
+
+        etName.setText(name);
+        etPhone.setText(phone);
         System.out.println(profile);
         try {
             imgvProfile.setClipToOutline(true);
@@ -37,10 +47,7 @@ public class UpdateActivity extends AppCompatActivity {
 
         try {
 
-            tvName.setText(intent.getStringExtra("name"));
-            tvPhone.setText(intent.getStringExtra("phone"));
-
-            if (profile.equals("null")) {
+            if (profile.equals("")) {
                 int defaultProfile = R.drawable.img_default;
                 imgvProfile.setImageResource(defaultProfile);
             } else {
@@ -49,5 +56,15 @@ public class UpdateActivity extends AppCompatActivity {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        imgBtnCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newName = etName.getText().toString();
+                String newPhone = etPhone.getText().toString();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.container, phoneActivity).commit();
+            }
+        });
     }
 }
