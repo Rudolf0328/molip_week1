@@ -82,7 +82,7 @@ public class UpdateActivity extends AppCompatActivity {
                 phoneActivity.setArguments(bundle);
 //                view = view.inflate(context,0,view);
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.layout.activity_phone, phoneActivity).commit();
+                fragmentManager.beginTransaction().replace(R.id.view_pager, phoneActivity).commit();
             }
         });
     }

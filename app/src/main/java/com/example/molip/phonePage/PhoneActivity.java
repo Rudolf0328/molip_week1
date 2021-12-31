@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,7 +37,7 @@ public class PhoneActivity extends Fragment {
     ImageButton btnAdd, btnNew;
     PhoneRcvAdapter rcvAdapter;
     ContactDB contactDB = null;
-    List<Contact> contactList;
+    LiveData<List<Contact>> contactList;
     Context context;
 
     @Nullable
@@ -48,7 +49,7 @@ public class PhoneActivity extends Fragment {
         try {
             contactDB = ContactDB.getInstance(context);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("1 " + e);
         }
 //        Contact contact = new Contact();
 //
@@ -71,7 +72,7 @@ public class PhoneActivity extends Fragment {
         try {
             contactList = ContactDB.getInstance(context).contactDao().getAll();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("2 " + e);
         }
         System.out.println(contactList);
 
@@ -133,19 +134,26 @@ public class PhoneActivity extends Fragment {
             newContact.phone = sNumber;
             newContact.profile = sImage;
 
-            System.out.println(newContact);
+            System.out.println(newContact.id + " " + newContact.pname + " " + newContact.phone + " " + newContact.profile);
+
 
             // TODO : convert dummylist to room
-            try {
-                ContactDB.getInstance(getActivity()).contactDao().insert(newContact);
-                contactList = ContactDB.getInstance(getActivity()).contactDao().getAll();
-                System.out.println(contactList);
-//            DummyData.dummyList.add(new PhoneData(sImage, sName, sNumber));
-                rcvAdapter = new PhoneRcvAdapter(contactList, getActivity());
-                rcvPhones.setAdapter(rcvAdapter);
-            } catch (Exception e) {
-                System.out.println(e);
+            class InsertRunnable implements Runnable {
+                @Override
+                public void run() {
+
+                    ContactDB.getInstance(getActivity()).contactDao().insert(newContact);
+                    contactList = ContactDB.getInstance(getActivity()).contactDao().getAll();
+                }
             }
+            InsertRunnable insertRunnable = new InsertRunnable();
+            Thread t = new Thread(insertRunnable);
+            t.start();
+
+            System.out.println(contactList);
+//            DummyData.dummyList.add(new PhoneData(sImage, sName, sNumber));
+            rcvAdapter = new PhoneRcvAdapter(contactList, getActivity());
+            rcvPhones.setAdapter(rcvAdapter);
         }
 
         super.onActivityResult(requestCode, resultCode, data);

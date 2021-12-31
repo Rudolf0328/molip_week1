@@ -30,6 +30,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -46,12 +47,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHolder> {
-    private List<Contact> contactList;
+    private LiveData<List<Contact>> contactList;
     private Context context;
 
     ContactDB contactDB = null;
 
-    public PhoneRcvAdapter(List<Contact> contactList, Context context) {
+    public PhoneRcvAdapter(LiveData<List<Contact>> contactList, Context context) {
         System.out.println(contactList);
         this.contactList = contactList;
         this.context = context;
@@ -65,9 +66,10 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
 
     public int getItemCount() {
         try {
-            return contactList.size();
+            return Integer.parseInt(ContactDB.getInstance(context).contactDao().getDataCount().toString());
+//            return contactList.();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("4 " + e);
             return 0;
         }
     }
@@ -89,7 +91,10 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
 
     public void onBindViewHolder(ViewHolder holder, final int position) {
 //        final Contact contact = contactList.get(position);
+        LiveData<List<Contact>> test = ContactDB.getInstance(context).contactDao().getAll();
         final Contact contact = ContactDB.getInstance(context).contactDao().getContactById(position);
+        System.out.println(test);
+
         System.out.println("pd: " + contact);
         holder.tvName.setText(contact.pname);
         holder.tvPhoneNum.setText(contact.phone);
@@ -163,58 +168,60 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
     }
 
     private void removeItemView(int position) {
-        contactList.remove(position);
+        Contact deleteContact = ContactDB.getInstance(context).contactDao().getContactById(position);
+        ContactDB.getInstance(context).contactDao().delete(deleteContact);
+//        contactList.removeObserver(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, contactList.size());
+//        notifyItemRangeChanged(position, contactList.size());
     }
 
-    public Bitmap loadContactPhoto(ContentResolver cr, long id, long photo_id) {
-        byte[] photoBytes = null;
-        Uri photoUri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, photo_id);
-        Cursor c = cr.query(photoUri, new String[]{ContactsContract.CommonDataKinds.Photo.PHOTO}, null, null, null);
-        try {
-            if (c.moveToFirst())
-                photoBytes = c.getBlob(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            c.close();
-        }
-
-        if(photoBytes != null) {
-            return resizingBitmap(BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.length));
-        } else
-            Log.d("PHOTO", "fail");
-
-        return null;
-    }
-
-    public Bitmap resizingBitmap(Bitmap oBitmap) {
-        if (oBitmap == null) {
-            return null;
-        }
-
-        float width = oBitmap.getWidth();
-        float height = oBitmap.getHeight();
-        float resizing_size = 120;
-
-        Bitmap rBitmap = null;
-        if (width > resizing_size) {
-            float mWidth = (float) (width / 100);
-            float fScale = (float) (resizing_size / mWidth);
-            width *= (fScale / 100);
-            height *= (fScale / 100);
-        } else if (height > resizing_size){
-            float mHeight = (float) (height / 100);
-            float fScale = (float) (resizing_size / mHeight);
-
-            width *= (fScale / 100);
-            height *= (fScale / 100);
-        }
-
-        rBitmap = Bitmap.createScaledBitmap(oBitmap, (int) width, (int) height, true);
-        return rBitmap;
-    }
+//    public Bitmap loadContactPhoto(ContentResolver cr, long id, long photo_id) {
+//        byte[] photoBytes = null;
+//        Uri photoUri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, photo_id);
+//        Cursor c = cr.query(photoUri, new String[]{ContactsContract.CommonDataKinds.Photo.PHOTO}, null, null, null);
+//        try {
+//            if (c.moveToFirst())
+//                photoBytes = c.getBlob(0);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            c.close();
+//        }
+//
+//        if(photoBytes != null) {
+//            return resizingBitmap(BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.length));
+//        } else
+//            Log.d("PHOTO", "fail");
+//
+//        return null;
+//    }
+//
+//    public Bitmap resizingBitmap(Bitmap oBitmap) {
+//        if (oBitmap == null) {
+//            return null;
+//        }
+//
+//        float width = oBitmap.getWidth();
+//        float height = oBitmap.getHeight();
+//        float resizing_size = 120;
+//
+//        Bitmap rBitmap = null;
+//        if (width > resizing_size) {
+//            float mWidth = (float) (width / 100);
+//            float fScale = (float) (resizing_size / mWidth);
+//            width *= (fScale / 100);
+//            height *= (fScale / 100);
+//        } else if (height > resizing_size){
+//            float mHeight = (float) (height / 100);
+//            float fScale = (float) (resizing_size / mHeight);
+//
+//            width *= (fScale / 100);
+//            height *= (fScale / 100);
+//        }
+//
+//        rBitmap = Bitmap.createScaledBitmap(oBitmap, (int) width, (int) height, true);
+//        return rBitmap;
+//    }
 
 
 

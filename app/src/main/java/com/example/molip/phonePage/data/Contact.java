@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Contact {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    public int id;
 
     @ColumnInfo(name = "profile")
     public String profile;

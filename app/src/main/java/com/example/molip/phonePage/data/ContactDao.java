@@ -1,5 +1,6 @@
 package com.example.molip.phonePage.data;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -11,7 +12,7 @@ import java.util.List;
 @Dao
 public interface ContactDao {
     @Query("SELECT * FROM contact")
-    List<Contact> getAll();
+    LiveData<List<Contact>> getAll();
 
     @Query("SELECT * FROM contact WHERE id in (:contactId)")
     Contact getContactById(int contactId);
@@ -21,4 +22,7 @@ public interface ContactDao {
 
     @Delete
     void delete(Contact contact);
+
+    @Query("SELECT COUNT(*) FROM contact")
+    LiveData<Integer> getDataCount();
 }
