@@ -46,7 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHolder> {
-//    private ArrayList<PhoneData> phoneList;
     private List<Contact> contactList;
     private Context context;
 
