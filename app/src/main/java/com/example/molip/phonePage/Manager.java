@@ -9,6 +9,7 @@ public class Manager {
     public final static int RC_DETAIL_TO_UPDATE = 1000;
     public final static int RC_CA_TO_DETAIL = 1001;
     public final static int RC_CA_TO_UPDATE = 1002;
+    public final static int RC_UPDATE_TO_CA = 10003;
 
     public static int getDrawableResId(String resName) {
         try {

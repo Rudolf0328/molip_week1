@@ -1,7 +1,6 @@
 package com.example.molip.phonePage;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
@@ -9,20 +8,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.molip.MainActivity;
 import com.example.molip.R;
-import com.example.molip.phonePage.adapter.PhoneRcvAdapter;
-import com.example.molip.phonePage.data.DummyData;
-import com.example.molip.phonePage.data.PhoneData;
-import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.zip.Inflater;
 
 public class UpdateActivity extends AppCompatActivity {
     Context context;
@@ -34,10 +24,10 @@ public class UpdateActivity extends AppCompatActivity {
 
         PhoneActivity phoneActivity = new PhoneActivity();
 
-        ImageView imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
-        EditText etName = (EditText) findViewById(R.id.update_et_name);
-        EditText etPhone = (EditText) findViewById(R.id.update_et_phone);
-        ImageButton imgBtnCheck = (ImageButton) findViewById(R.id.update_img_btn_check);
+        ImageView imgvProfile = (ImageView) findViewById(R.id.add_imgv_profile);
+        EditText etName = (EditText) findViewById(R.id.add_et_name);
+        EditText etPhone = (EditText) findViewById(R.id.add_et_phone);
+        ImageButton imgBtnCheck = (ImageButton) findViewById(R.id.add_img_btn_check);
         Intent intent = getIntent();
 
         String profile = intent.getStringExtra("profile");

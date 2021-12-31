@@ -13,20 +13,25 @@ import java.util.List;
 
 public class Adapter extends FragmentPagerAdapter {
 
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private ArrayList<List<Fragment>> fragmentList = new ArrayList<>();
 
     public Adapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 
     public void addFragment(Fragment fragment){
-        fragmentList.add(fragment);
+        fragmentList.add((List<Fragment>) fragment);
+    }
 
+    public void addFragmentInTab (Fragment fragment, int index ) {
+        List<Fragment> fragments = fragmentList.get(index);
+        fragments.add(fragment);
+        fragmentList.add(fragments);
     }
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return fragmentList.get(position);
+        return fragmentList.get(position).get(0);
     }
 
     @Override

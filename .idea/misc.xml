@@ -10,6 +10,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2821557971014493" />
         <entry key="app/src/main/res/layout/activity_phone.xml" value="0.20785188563675844" />
         <entry key="app/src/main/res/layout/activity_update.xml" value="0.1877440415511324" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_phone.xml" value="0.10507246376811594" />
         <entry key="app/src/main/res/layout/item_btn_call.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_btn_msg.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_imgv_profile.xml" value="0.1" />

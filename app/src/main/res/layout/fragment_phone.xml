@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/phone_list"
+        android:layout_width="match_parent"
+        android:layout_height="510dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/phone_btn_add"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_shape"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_contact" />
+
+        <ImageButton
+            android:id="@+id/phone_btn_new"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="240dp"
+            android:background="@drawable/button_shape"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_add"
+            android:tint="#000000" />
+    </LinearLayout>
+
+</LinearLayout>

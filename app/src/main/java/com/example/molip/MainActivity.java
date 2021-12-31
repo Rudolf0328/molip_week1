@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.molip.phonePage.DetailActivity;
 import com.example.molip.phonePage.PhoneActivity;
+import com.example.molip.phonePage.PhoneFragment;
 import com.example.molip.picturePage.Pictures;
 import com.google.android.material.tabs.TabLayout;
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         adapter=new Adapter(getSupportFragmentManager(),1);
 
         //FragmentAdapter에 컬렉션 담기
-        adapter.addFragment(new PhoneActivity());
+        adapter.addFragment(new PhoneFragment());
         adapter.addFragment(new Pictures());
 //        adapter.addFragment(new Frag3());
 

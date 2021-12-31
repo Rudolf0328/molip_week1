@@ -33,9 +33,9 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        ImageView imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
+        ImageView imgvProfile = (ImageView) findViewById(R.id.add_imgv_profile);
         TextView tvName = (TextView) findViewById(R.id.detail_tv_name), tvPhone = (TextView) findViewById(R.id.detail_tv_phone);
-        ImageButton imgBtnEdit = (ImageButton) findViewById(R.id.update_img_btn_check);
+        ImageButton imgBtnEdit = (ImageButton) findViewById(R.id.add_img_btn_check);
         Intent intent = getIntent();
 
         String profile = intent.getStringExtra("profile");

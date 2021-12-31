@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,8 +27,8 @@ import com.example.molip.phonePage.data.PhoneData;
 import java.util.Objects;
 
 //외부에서 new Frag1 호출 시
-public class PhoneActivity extends Fragment {
-//    private FragmentHomeBinding binding;
+public class PhoneFragment extends Fragment {
+    //    private FragmentHomeBinding binding;
     RecyclerView rcvPhones;
     ImageButton btnAdd, btnNew;
     PhoneRcvAdapter rcvAdapter;
@@ -36,7 +37,7 @@ public class PhoneActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewGroup v = (ViewGroup) inflater.inflate(R.layout.activity_phone,container,false);
+        ViewGroup v = (ViewGroup) inflater.inflate(R.layout.fragment_phone,container,false);
         try {
             String newName = getArguments().getString("newName");
             String newPhone = getArguments().getString("newPhone");
@@ -64,14 +65,15 @@ public class PhoneActivity extends Fragment {
         });
 
         btnNew.setOnClickListener(new View.OnClickListener() {
+            final AddFragment addFragment = new AddFragment();
+            Bundle bundle = new Bundle();
             @Override
             public void onClick(View view) {
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.).commit();
-                Intent addNew = new Intent(getActivity(), UpdateActivity.class);
-                addNew.putExtra("name", "");
-                addNew.putExtra("phone", "");
-                addNew.putExtra("profile", "");
-                Objects.requireNonNull(getActivity()).startActivityForResult(addNew, Manager.RC_CA_TO_UPDATE);
+                bundle.putString("name", "");
+                bundle.putString("phone", "");
+                bundle.putString("profile", "");
+                addFragment.setArguments(bundle);
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.view_pager, addFragment).addToBackStack(null).commit();
             }
         });
         return v;
@@ -81,7 +83,6 @@ public class PhoneActivity extends Fragment {
         String sName = "error";
         String sNumber = "error";
         String sImage = "error";
-//        String sPerson = "error";
 
         if (resultCode == RESULT_OK) {
             Cursor cursor = getActivity().getContentResolver().query(data.getData(), new String[]{ContactsContract.CommonDataKinds.Phone.PHOTO_URI, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER}, null, null, null);
