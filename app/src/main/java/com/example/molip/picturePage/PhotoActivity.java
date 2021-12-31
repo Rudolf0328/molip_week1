@@ -38,7 +38,7 @@ public class PhotoActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 000;
     private String imageFilePath;
     private Uri photoUrl;
-
+    Bitmap bitmap;
     private MediaScanner mMediaScanner;
 
     @Override
@@ -149,11 +149,67 @@ public class PhotoActivity extends AppCompatActivity {
                 e.printStackTrace();
                 result = "File close Error";
             }
-
+//            String result = "";
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HHmmss", Locale.getDefault());
+//            Date curDate = new Date(System.currentTimeMillis());
+//            String fileName = formatter.format(curDate);
+//            ContentValues values = new ContentValues();
+//            values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
+//            values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+//            // 파일을 write중이라면 다른곳에서 데이터요구를 무시하겠다는 의미입니다.
+//            values.put(MediaStore.Images.Media.IS_PENDING, 1);
+//
+//            ContentResolver contentResolver = getContentResolver();
+//            Uri collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+//            Uri item = contentResolver.insert(collection, values);
+//
+//            try {
+//                ParcelFileDescriptor pdf = contentResolver.openFileDescriptor(item, "w", null);
+//                if (pdf == null) {
+//
+//                } else {
+//                    InputStream inputStream = getImageInputStram();
+//                    byte[] strToByte = getBytes(inputStream);
+//                    FileOutputStream fos = new FileOutputStream(pdf.getFileDescriptor());
+//                    fos.write(strToByte);
+//                    fos.close();
+//                    inputStream.close();
+//                    pdf.close();
+//                    contentResolver.update(item, values, null, null);
+//                }
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            values.clear();
+//            // 파일을 모두 write하고 다른곳에서 사용할 수 있도록 0으로 업데이트를 해줍니다.
+//            values.put(MediaStore.Images.Media.IS_PENDING, 0);
+//            contentResolver.update(item, values, null, null);
             ((ImageView) findViewById(R.id.iv_photo)).setImageBitmap(rotate(bitmap, exifDegree));
         }
-
     }
+
+//    private InputStream getImageInputStram() {
+//        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+//        byte[] bitmapData = bytes.toByteArray();
+//        ByteArrayInputStream bs = new ByteArrayInputStream(bitmapData);
+//
+//        return bs;
+//    }
+//
+//    public byte[] getBytes(InputStream inputStream) throws IOException {
+//        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+//        int bufferSize = 1024;
+//        byte[] buffer = new byte[bufferSize];
+//
+//        int len = 0;
+//        while ((len = inputStream.read(buffer)) != -1) {
+//            byteBuffer.write(buffer, 0, len);
+//        }
+//        return byteBuffer.toByteArray();
+//    }
 
     private int exifOrientationToDegress(int exifOrientation) {
         if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) {

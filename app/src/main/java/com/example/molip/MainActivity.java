@@ -1,13 +1,13 @@
 package com.example.molip;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.Bundle;
-
-import com.example.molip.phonePage.DetailActivity;
 import com.example.molip.phonePage.PhoneActivity;
 import com.example.molip.picturePage.Pictures;
+import com.example.molip.randomPage.RandomFrag;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         //FragmentAdapter에 컬렉션 담기
         adapter.addFragment(new PhoneActivity());
         adapter.addFragment(new Pictures());
-//        adapter.addFragment(new Frag3());
+        adapter.addFragment(new RandomFrag());
 
         //ViewPager Fragment 연결
         viewPager.setAdapter(adapter);
@@ -39,6 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.getTabAt(0).setText("Phone Book");
         tabLayout.getTabAt(1).setText("Images");
-//        tabLayout.getTabAt(2).setText("세 번째");
+        tabLayout.getTabAt(2).setText("Food Today");
     }
 }

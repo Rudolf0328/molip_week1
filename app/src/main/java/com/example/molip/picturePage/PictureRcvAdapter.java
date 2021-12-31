@@ -71,7 +71,7 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
                 intent.putExtra("position", position);
                 //intent.putExtra("image", imageData);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                imageData.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                imageData.compress(Bitmap.CompressFormat.JPEG, 20, stream);
                 byte[] byteArray = stream.toByteArray();
                 intent.putExtra("image",byteArray);
                 ((Activity)context).startActivityForResult(intent, PictureManager.RQ_PIC_TO_DETAIL);
