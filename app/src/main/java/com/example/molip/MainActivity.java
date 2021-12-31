@@ -5,7 +5,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.google.android.material.tabs.TabItem;
+import com.example.molip.phonePage.DetailActivity;
+import com.example.molip.phonePage.PhoneActivity;
+import com.example.molip.picturePage.Pictures;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         adapter=new Adapter(getSupportFragmentManager(),1);
 
         //FragmentAdapter에 컬렉션 담기
-        adapter.addFragment(new Phone());
+        adapter.addFragment(new PhoneActivity());
         adapter.addFragment(new Pictures());
 //        adapter.addFragment(new Frag3());
 
@@ -35,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         //ViewPager과 TabLayout 연결
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setText("첫 번째");
-        tabLayout.getTabAt(1).setText("두 번째");
+        tabLayout.getTabAt(0).setText("Phone Book");
+        tabLayout.getTabAt(1).setText("Images");
 //        tabLayout.getTabAt(2).setText("세 번째");
     }
 }
