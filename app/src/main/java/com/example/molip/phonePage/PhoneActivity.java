@@ -37,6 +37,15 @@ public class PhoneActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewGroup v = (ViewGroup) inflater.inflate(R.layout.activity_phone,container,false);
+        try {
+            String newName = getArguments().getString("newName");
+            String newPhone = getArguments().getString("newPhone");
+            String newProfile = getArguments().getString("newProfile");
+
+            DummyData.dummyList.add(new PhoneData(newProfile, newName, newPhone));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         rcvPhones = (RecyclerView) v.findViewById(R.id.phone_list);
         btnAdd = (ImageButton) v.findViewById(R.id.phone_btn_add);
         btnNew = (ImageButton) v.findViewById(R.id.phone_btn_new);
@@ -57,6 +66,7 @@ public class PhoneActivity extends Fragment {
         btnNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                getActivity().getSupportFragmentManager().beginTransaction().replace().commit();
                 Intent addNew = new Intent(getActivity(), UpdateActivity.class);
                 addNew.putExtra("name", "");
                 addNew.putExtra("phone", "");
