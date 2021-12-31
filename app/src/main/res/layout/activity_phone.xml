@@ -24,15 +24,19 @@
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/button_shape"
-            android:src="@android:drawable/ic_input_add" />
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_contact" />
 
         <ImageButton
             android:id="@+id/phone_btn_new"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="240dp"
             android:background="@drawable/button_shape"
-            android:src="@android:drawable/ic_input_add"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_add"
             android:tint="#000000" />
     </LinearLayout>
 
