@@ -15,6 +15,9 @@ public interface ContactDAO {
     @Query("SELECT * FROM contact WHERE contactId IN (:contactId)")
     List<Contact> loadAllByIds(int[] contactId);
 
+    @Query("SELECT * FROM contact WHERE contactId IN (:contactId)")
+    Contact getContact(int contactId);
+
     @Insert
     void insert(Contact... contact);
 

@@ -16,7 +16,7 @@ public class Contact {
     public String phone;
 
     @ColumnInfo(name="profile")
-    public long profile;
+    public String profile;
 
     @ColumnInfo(name="ban")
     public String ban;

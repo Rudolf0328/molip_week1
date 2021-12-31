@@ -38,16 +38,19 @@ import com.example.molip.R;
 import com.example.molip.phonePage.DetailActivity;
 import com.example.molip.phonePage.Manager;
 import com.example.molip.phonePage.PhoneActivity;
+import com.example.molip.phonePage.data.Contact;
+import com.example.molip.phonePage.data.ContactDB;
 import com.example.molip.phonePage.data.PhoneData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHolder> {
-    private ArrayList<PhoneData> phoneList;
+    private List<Contact> contactList;
     private Context context;
-    public PhoneRcvAdapter(ArrayList<PhoneData> phoneList, Context context) {
-        System.out.println(phoneList);
-        this.phoneList = phoneList;
+    public PhoneRcvAdapter(List<Contact> contactList, Context context) {
+        System.out.println(contactList);
+        this.contactList = contactList;
         this.context = context;
     }
 
@@ -58,7 +61,10 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
     }
 
     public int getItemCount() {
-        return phoneList.size();
+        if (contactList == null) {
+            return 0;
+        }
+        return contactList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -77,23 +83,26 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
     }
 
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        final PhoneData phoneData = phoneList.get(position);
-        System.out.println("pd: " + phoneData);
-        holder.tvName.setText(phoneData.getName());
-        holder.tvPhoneNum.setText(phoneData.getPhoneNum());
-        if(phoneData.getProfileRes().equals("null")) {
+        //TODO : convert to getContact
+        Contact contact = ContactDB.getInstance(context).contactDAO().getContact(position);
+//        contactList = ContactDB.getInstance(context).contactDAO().getAll();
+//        final PhoneData phoneData = contactList.get(position);
+        System.out.println("pd: " + contact);
+        holder.tvName.setText(contact.name);
+        holder.tvPhoneNum.setText(contact.phone);
+        if(contact.profile.equals("null")) {
             int resourceId = R.drawable.img_default;
             holder.imgProfile.setImageResource(resourceId);
         } else {
-            holder.imgProfile.setImageURI(Uri.parse(phoneData.getProfileRes()));
+            holder.imgProfile.setImageURI(Uri.parse(contact.profile));
         }
 
-        System.out.println("img: " + phoneData.getProfileRes());
+        System.out.println("img: " + contact.profile);
 
         holder.btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + phoneData.getPhoneNum()));
+                Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + contact.phone));
                 context.startActivity(callIntent);
             }
         });
@@ -101,7 +110,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
         holder.btnMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent msgIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneData.getPhoneNum()));
+                Intent msgIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + contact.phone));
                 context.startActivity(msgIntent);
             }
         });
@@ -117,9 +126,9 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
 //                activity.get
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("position", position);
-                intent.putExtra("name", phoneData.getName());
-                intent.putExtra("phone", phoneData.getPhoneNum());
-                intent.putExtra("profile", phoneData.getProfileRes());
+                intent.putExtra("name", contact.name);
+                intent.putExtra("phone", contact.phone);
+                intent.putExtra("profile", contact.profile);
                 ((Activity)context).startActivityForResult(intent, Manager.RC_CA_TO_DETAIL);
             }
         });
@@ -151,9 +160,13 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
     }
 
     private void removeItemView(int position) {
-        phoneList.remove(position);
+        // TODO : convert to room delete
+        Contact contact = new Contact();
+        contact = ContactDB.getInstance(context).contactDAO().getContact(position);
+        ContactDB.getInstance(context).contactDAO().delete(contact);
+//        contactList.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, phoneList.size());
+//        notifyItemRangeChanged(position, contactList.size());
     }
 
     public Bitmap loadContactPhoto(ContentResolver cr, long id, long photo_id) {
@@ -203,7 +216,5 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
         rBitmap = Bitmap.createScaledBitmap(oBitmap, (int) width, (int) height, true);
         return rBitmap;
     }
-
-
 
 }
