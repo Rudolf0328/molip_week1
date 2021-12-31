@@ -71,6 +71,7 @@ public class PhoneActivity extends Fragment {
 
         });
 //<<<<<<< HEAD
+//<<<<<<< HEAD
 //
 //        btnNew.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -85,6 +86,21 @@ public class PhoneActivity extends Fragment {
 //        });
 //=======
 //>>>>>>> 25837d33795088de439bc254e4b6b3f674bbf5e4
+//=======
+//
+//
+//        btnNew.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                getActivity().getSupportFragmentManager().beginTransaction().replace().commit();
+//                Intent addNew = new Intent(getActivity(), UpdateActivity.class);
+//                addNew.putExtra("name", "");
+//                addNew.putExtra("phone", "");
+//                addNew.putExtra("profile", "");
+//                Objects.requireNonNull(getActivity()).startActivityForResult(addNew, Manager.RC_CA_TO_UPDATE);
+//            }
+//        });
+//>>>>>>> d942ec92da4fad6d59b4494e1a723f76c1344c3b
         return v;
     }
 

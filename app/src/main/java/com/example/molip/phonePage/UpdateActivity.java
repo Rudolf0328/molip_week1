@@ -1,13 +1,10 @@
 package com.example.molip.phonePage;
 
-<<<<<<< HEAD
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
-=======
->>>>>>> 25837d33795088de439bc254e4b6b3f674bbf5e4
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,11 +55,20 @@ public class UpdateActivity extends AppCompatActivity {
         }
 
         try {
-//
 //<<<<<<< HEAD
-//                if (profile.equals("")) {
-            if (profile.equals("null")) {
-                    int defaultProfile = R.drawable.img_default;
+////
+////<<<<<<< HEAD
+////                if (profile.equals("")) {
+//            if (profile.equals("null")) {
+//                    int defaultProfile = R.drawable.img_default;
+//=======
+
+//            tvName.setText(intent.getStringExtra("name"));
+//            tvPhone.setText(intent.getStringExtra("phone"));
+
+//            if (profile.equals("null")) {
+            if (profile.equals("")) {
+                int defaultProfile = R.drawable.img_default;
                 imgvProfile.setImageResource(defaultProfile);
             } else {
                 imgvProfile.setImageURI(Uri.parse(profile));
