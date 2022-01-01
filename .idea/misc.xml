@@ -4,23 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1640625" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/activity_camera.xml" value="0.2368659420289855" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/activity_main.xml" value="0.19927536231884058" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/activity_phone.xml" value="0.17806484295845998" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/activity_update.xml" value="0.17806484295845998" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/phone.xml" value="0.19927536231884058" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/phone_item.xml" value="0.17806484295845998" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/picture_detail.xml" value="0.11458333333333333" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/picture_item.xml" value="0.25364583333333335" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/pictures.xml" value="0.2" />
-        <entry key="..\:/molip_week1/app/src/main/res/layout/randomfrag.xml" value="0.2875" />
-        <entry key="..\:/molip_week1/app/src/main/res/xml/file_paths.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/drawable/round_background_border_black.xml" value="0.2496019408115059" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.5931646028661106" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2821557971014493" />
+        <entry key="app/src/main/res/layout/activity_money.xml" value="0.21041293124612212" />
         <entry key="app/src/main/res/layout/activity_phone.xml" value="0.20785188563675844" />
+        <entry key="app/src/main/res/layout/activity_photo.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/layout/activity_update.xml" value="0.1877440415511324" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_phone.xml" value="0.10507246376811594" />
         <entry key="app/src/main/res/layout/item_btn_call.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_btn_msg.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_imgv_profile.xml" value="0.1" />
