@@ -3,55 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/item_imgv_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/item_imgv_profile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            tools:srcCompat="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/item_tv_name"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:text="Name"
+        app:layout_constraintStart_toEndOf="@+id/item_imgv_profile"
+        app:layout_constraintEnd_toStartOf="@+id/item_btn_call"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/item_tv_phone_num"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/item_imgv_profile"
+        app:layout_constraintEnd_toStartOf="@+id/item_btn_call"
+        app:layout_constraintTop_toBottomOf="@+id/item_tv_name" />
 
-            <TextView
-                android:id="@+id/item_tv_name"
-                android:layout_width="180dp"
-                android:layout_height="30dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:text="Name" />
+    <ImageButton
+        android:id="@+id/item_btn_call"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/round_background_border_black"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/item_btn_msg"
+        app:layout_constraintStart_toEndOf="@+id/item_tv_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_call" />
 
-            <TextView
-                android:id="@+id/item_tv_phone_num"
-                android:layout_width="180dp"
-                android:layout_height="30dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:text="TextView" />
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/item_btn_call"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/sym_action_call" />
-
-        <ImageButton
-            android:id="@+id/item_btn_msg"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_send" />
-
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/item_btn_msg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/round_background_border_black"
+        android:padding="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_btn_call"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_msg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

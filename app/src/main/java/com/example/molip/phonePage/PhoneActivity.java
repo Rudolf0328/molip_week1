@@ -9,6 +9,7 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,7 @@ import com.example.molip.phonePage.data.PhoneData;
 public class PhoneActivity extends Fragment {
 //    private FragmentHomeBinding binding;
     RecyclerView rcvPhones;
-    ImageButton btnAdd;
+    Button btnAdd;
     PhoneRcvAdapter rcvAdapter;
 
     @Nullable
@@ -44,7 +45,7 @@ public class PhoneActivity extends Fragment {
             System.out.println(e);
         }
         rcvPhones = (RecyclerView) v.findViewById(R.id.phone_list);
-        btnAdd = (ImageButton) v.findViewById(R.id.phone_btn_add);
+        btnAdd = (Button) v.findViewById(R.id.phone_btn_add);
         rcvPhones.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
         rcvPhones.setAdapter(rcvAdapter);
