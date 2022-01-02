@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.molip.MainActivity;
 import com.example.molip.R;
 import com.example.molip.phonePage.adapter.PhoneRcvAdapter;
+import com.example.molip.phonePage.data.Contact;
+import com.example.molip.phonePage.data.ContactDB;
 import com.example.molip.phonePage.data.DummyData;
 import com.example.molip.phonePage.data.PhoneData;
 import com.google.android.material.textfield.TextInputEditText;
@@ -73,21 +75,29 @@ public class UpdateActivity extends AppCompatActivity {
         imgBtnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Contact newContact = new Contact();
                 String newName = etName.getText().toString();
                 String newPhone = etPhone.getText().toString();
+
+                newContact.name = newName;
+                newContact.phone = newPhone;
+
+                ContactDB.getInstance(context).contactDAO().insert(newContact);
 //                Intent intent = new Intent(this, MainActivity.class);
 //                DummyData.dummyList.add(new PhoneData(profile, newName, newPhone));
 //                rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
 //                rcvPhones.setAdapter(rcvAdapter);
-                Bundle bundle = new Bundle(); // 번들을 통해 값 전달
-                bundle.putString("newName", newName);//번들에 넘길 값 저장
-                bundle.putString("newPhone", newPhone);
-                bundle.putString("newProfile", profile);
-//                PhoneActivity phoneActivity1 = new PhoneActivity();
-                phoneActivity.setArguments(bundle);
+//                Bundle bundle = new Bundle(); // 번들을 통해 값 전달
+//                bundle.putString("newName", newName);//번들에 넘길 값 저장
+//                bundle.putString("newPhone", newPhone);
+//                bundle.putString("newProfile", profile);
+////                PhoneActivity phoneActivity1 = new PhoneActivity();
+//                phoneActivity.setArguments(bundle);
 //                view = view.inflate(context,0,view);
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.layout.activity_phone, phoneActivity).commit();
+
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.view_pager, phoneActivity).commit();
+                finish();
             }
         });
     }
