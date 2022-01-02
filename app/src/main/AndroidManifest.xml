@@ -23,7 +23,7 @@
             android:name=".randomPage.MoneyActivity"
             android:exported="false" />
         <activity
-            android:name=".randomPage.RulletActivity"
+            android:name=".randomPage.RouletteActivity"
             android:exported="false" />
         <activity
             android:name=".picturePage.PhotoActivity"

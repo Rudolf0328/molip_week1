@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.example.molip.randomPage.RouletteActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ViewFlipper
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inAnimation="@anim/anim_in"
+            android:outAnimation="@anim/anim_out"
+            android:id="@+id/image_slide">
+
+            <ImageView
+                android:id="@+id/ran1"
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp" />
+
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:id="@+id/ran2"/>
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:id="@+id/ran3"/>
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:id="@+id/ran4"/>
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:id="@+id/ran5"/>
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:id="@+id/ran6"/>
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:id="@+id/ran7"/>
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:id="@+id/ran8"/>
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:id="@+id/ran9"/>
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                android:id="@+id/ran10"/>
+        </ViewFlipper>
+
+        <ImageView
+            android:id="@+id/foodimage"
+            android:layout_width="360dp"
+            android:layout_height="360dp"
+            android:adjustViewBounds="true"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            tools:ignore="ContentDescription,MissingConstraints"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/ranimage"
+            android:layout_width="360dp"
+            android:layout_height="360dp"
+            android:adjustViewBounds="true"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            tools:ignore="ContentDescription,MissingConstraints"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textfood"
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            android:textSize="40sp"
+            android:layout_marginTop="400dp"
+            android:gravity="center_horizontal"/>
+
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

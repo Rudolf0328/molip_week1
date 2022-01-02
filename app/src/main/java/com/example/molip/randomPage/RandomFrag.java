@@ -21,7 +21,7 @@ public class RandomFrag extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), RulletActivity.class);
+                Intent intent = new Intent(getActivity(), RouletteActivity.class);
                 startActivity(intent);
             }
         });
