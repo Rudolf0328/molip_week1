@@ -28,6 +28,7 @@ import com.example.molip.phonePage.data.ContactDB;
 import com.example.molip.phonePage.data.DummyData;
 import com.example.molip.phonePage.data.PhoneData;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,7 +39,7 @@ public class PhoneActivity extends Fragment {
     ImageButton btnAdd, btnNew;
     PhoneRcvAdapter rcvAdapter;
     ContactDB contactDB = null;
-    LiveData<List<Contact>> contactList;
+    ArrayList<Contact> contactList;
     Context context;
 
     @Nullable

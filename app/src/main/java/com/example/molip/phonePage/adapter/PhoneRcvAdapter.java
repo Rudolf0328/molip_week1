@@ -47,12 +47,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHolder> {
-    private LiveData<List<Contact>> contactList;
+    private ArrayList<Contact> contactList;
     private Context context;
 
     ContactDB contactDB = null;
 
-    public PhoneRcvAdapter(LiveData<List<Contact>> contactList, Context context) {
+    public PhoneRcvAdapter(ArrayList<Contact> contactList, Context context) {
         System.out.println(contactList);
         this.contactList = contactList;
         this.context = context;

@@ -13,7 +13,7 @@ public abstract class ContactDB extends RoomDatabase {
 
     public static ContactDB getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ContactDB.class, "contact.db").build();
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ContactDB.class, "contact.db").AllowMainThreadQuery().build();
         }
         return INSTANCE;
     }

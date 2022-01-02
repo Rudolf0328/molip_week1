@@ -7,12 +7,13 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface ContactDao {
     @Query("SELECT * FROM contact")
-    LiveData<List<Contact>> getAll();
+    ArrayList<Contact> getAll();
 
     @Query("SELECT * FROM contact WHERE id in (:contactId)")
     Contact getContactById(int contactId);
@@ -22,7 +23,7 @@ public interface ContactDao {
 
     @Delete
     void delete(Contact contact);
-
-    @Query("SELECT COUNT(*) FROM contact")
-    LiveData<Integer> getDataCount();
+//
+//    @Query("SELECT COUNT(*) FROM contact")
+//    LiveData<Integer> getDataCount();
 }
