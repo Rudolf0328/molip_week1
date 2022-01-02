@@ -24,13 +24,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="number"
+        android:textAlignment="textEnd"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
@@ -38,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="Average"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/money_et_price" />
@@ -88,7 +87,9 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:background="@drawable/round_rectangle_button"
-        android:text="Add"
+        android:text="추가"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/money_btn_good" />
 
@@ -98,7 +99,9 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:background="@drawable/round_rectangle_button"
-        android:text="Delete"
+        android:text="삭제"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/money_btn_add"
         app:layout_constraintTop_toBottomOf="@+id/money_btn_good" />
 
@@ -147,5 +150,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="원"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/money_et_price"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
