@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -136,7 +137,7 @@ public class PhoneActivity extends Fragment {
 
             System.out.println(newContact.id + " " + newContact.pname + " " + newContact.phone + " " + newContact.profile);
 
-
+            Handler handler  = new Handler();
             // TODO : convert dummylist to room
             class InsertRunnable implements Runnable {
                 @Override
