@@ -42,6 +42,9 @@ import java.util.zip.Inflater;
 public class UpdateActivity extends AppCompatActivity {
     Context context;
     Uri newProfile;
+    ImageView imgvProfile;
+    EditText etName, etPhone, etBan;
+    ImageButton imgBtnCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +53,15 @@ public class UpdateActivity extends AppCompatActivity {
 
         PhoneActivity phoneActivity = new PhoneActivity();
 
-        ImageView imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
-        EditText etName = (EditText) findViewById(R.id.update_et_name);
-        EditText etPhone = (EditText) findViewById(R.id.update_et_phone);
-        ImageButton imgBtnCheck = (ImageButton) findViewById(R.id.update_img_btn_check);
+        imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
+        etName = (EditText) findViewById(R.id.update_et_name);
+        etPhone = (EditText) findViewById(R.id.update_et_phone);
+        etBan = (EditText) findViewById(R.id.update_et_ban);
+        imgBtnCheck = (ImageButton) findViewById(R.id.update_img_btn_check);
+
         etPhone.setInputType(android.text.InputType.TYPE_CLASS_PHONE);
         etPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
         Intent intent = getIntent();
 
         int id = intent.getIntExtra("id", 0);
@@ -63,9 +69,12 @@ public class UpdateActivity extends AppCompatActivity {
         String profile = intent.getStringExtra("profile");
         String name = intent.getStringExtra("name");
         String phone = intent.getStringExtra("phone");
+        String ban = intent.getStringExtra("ban");
 
         etName.setText(name);
         etPhone.setText(phone);
+        etBan.setText(ban);
+
         System.out.println(profile);
         try {
             imgvProfile.setClipToOutline(true);
@@ -104,6 +113,7 @@ public class UpdateActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String newName = etName.getText().toString();
                 String newPhone = etPhone.getText().toString();
+                String newBan = etBan.getText().toString();
 
                 if(id == 9999) {
                     System.out.println("new");
@@ -111,6 +121,7 @@ public class UpdateActivity extends AppCompatActivity {
                     Contact newContact = new Contact();
                     newContact.setName(newName);
                     newContact.setPhone(newPhone);
+                    newContact.setBan(newBan);
                     if (newProfile == null) {
                         newContact.setProfile("null");
                     } else {
@@ -126,6 +137,7 @@ public class UpdateActivity extends AppCompatActivity {
                     Contact contact = ContactDB.getInstance(context).contactDAO().getContact(id);
                     contact.setName(newName);
                     contact.setPhone(newPhone);
+                    contact.setBan(newBan);
 //                    contact.setProfile(newProfile.toString());
                     System.out.println(contact.toString());
 
@@ -160,6 +172,8 @@ public class UpdateActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
             Log.d("URI", imageUri.toString());
             newProfile = imageUri;
+
+            imgvProfile.setImageURI(newProfile);
 
 //            imgvProfile.
         }

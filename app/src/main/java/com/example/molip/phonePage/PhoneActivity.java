@@ -114,6 +114,7 @@ public class PhoneActivity extends Fragment {
             newContact.setName(sName);
             newContact.setPhone(sNumber);
             newContact.setProfile(sImage);
+            newContact.setBan("?");
 
             ContactDB.getInstance(getActivity()).contactDAO().insert(newContact);
             contactList = (ArrayList<Contact>) ContactDB.getInstance(getActivity()).contactDAO().getAll();

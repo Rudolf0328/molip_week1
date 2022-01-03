@@ -28,14 +28,20 @@ public class DetailActivity extends AppCompatActivity {
 //        this.context = context;
 //    }
 
+    ImageView imgvProfile;
+    TextView tvName, tvPhone, tvBan;
+    ImageButton imgBtnEdit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        ImageView imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
-        TextView tvName = (TextView) findViewById(R.id.detail_tv_name), tvPhone = (TextView) findViewById(R.id.detail_tv_phone);
-        ImageButton imgBtnEdit = (ImageButton) findViewById(R.id.update_img_btn_check);
+        imgvProfile = (ImageView) findViewById(R.id.detail_imgv_profile);
+        tvName = (TextView) findViewById(R.id.detail_tv_name);
+        tvPhone = (TextView) findViewById(R.id.detail_tv_phone);
+        tvBan = (TextView) findViewById(R.id.detail_tv_ban);
+        imgBtnEdit = (ImageButton) findViewById(R.id.update_img_btn_check);
         Intent intent = getIntent();
 
 
@@ -43,6 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         String profile = intent.getStringExtra("profile");
         String name = intent.getStringExtra("name");
         String phone = intent.getStringExtra("phone");
+        String ban = intent.getStringExtra("ban");
 
         System.out.println(profile);
         try {
@@ -55,6 +62,7 @@ public class DetailActivity extends AppCompatActivity {
 
             tvName.setText(intent.getStringExtra("name"));
             tvPhone.setText(intent.getStringExtra("phone"));
+            tvBan.setText(intent.getStringExtra("ban"));
 
             if (profile.equals("null")) {
                 int defaultProfile = R.drawable.img_default;
@@ -80,6 +88,7 @@ public class DetailActivity extends AppCompatActivity {
                 edit.putExtra("name", name);
                 edit.putExtra("phone", phone);
                 edit.putExtra("profile", profile);
+                edit.putExtra("ban", ban);
                 startActivityForResult(edit, Manager.RC_CA_TO_UPDATE);
 
                 // TODO : 그냥 꺼지게 했는데 안 꺼지게도 할 수 있나 intent 쓰면 되나
