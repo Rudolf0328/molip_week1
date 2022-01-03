@@ -190,14 +190,6 @@ public class PhotoActivity extends AppCompatActivity {
         }
     }
 
-//    private InputStream getImageInputStram() {
-//        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bytes);
-//        byte[] bitmapData = bytes.toByteArray();
-//        ByteArrayInputStream bs = new ByteArrayInputStream(bitmapData);
-//
-//        return bs;
-//    }
 //
 //    public byte[] getBytes(InputStream inputStream) throws IOException {
 //        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
