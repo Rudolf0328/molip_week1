@@ -28,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +43,10 @@ import com.example.molip.phonePage.PhoneActivity;
 import com.example.molip.phonePage.data.Contact;
 import com.example.molip.phonePage.data.ContactDB;
 import com.example.molip.phonePage.data.PhoneData;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +98,14 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
             } else {
                 Uri p = Uri.parse(contact.getProfile());
                 System.out.println(p);
+
+//                TedPermission.with(context.getApplicationContext())
+//                        .setPermissionListener(permissionListener)
+//                        .setRationaleMessage("카메라 권한이 필요합니다.")
+//                        .setDeniedMessage("카메라 권한을 거부하셨습니다.")
+//                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+//                        .check();
+
 //                context.getContentResolver().takePersistableUriPermission(p, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 imgProfile.setImageURI(p);
             }
@@ -182,5 +195,17 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
 //        notifyItemRemoved(position);
 //        notifyItemRangeChanged(position, phoneList.size());
     }
+
+//    PermissionListener permissionListener = new PermissionListener() {
+//        @Override
+//        public void onPermissionGranted() {
+////            Toast.makeText(, "권한이 허용됨", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        @Override
+//        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+////            Toast.makeText(getApplicationContext(), "권한이 거부됨", Toast.LENGTH_SHORT).show();
+//        }
+//    };
 
 }
