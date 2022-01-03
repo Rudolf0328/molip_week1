@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.molip.MainActivity;
 import com.example.molip.R;
 import com.example.molip.phonePage.adapter.PhoneRcvAdapter;
@@ -52,6 +54,8 @@ public class UpdateActivity extends AppCompatActivity {
         EditText etName = (EditText) findViewById(R.id.update_et_name);
         EditText etPhone = (EditText) findViewById(R.id.update_et_phone);
         ImageButton imgBtnCheck = (ImageButton) findViewById(R.id.update_img_btn_check);
+        etPhone.setInputType(android.text.InputType.TYPE_CLASS_PHONE);
+        etPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         Intent intent = getIntent();
 
         int id = intent.getIntExtra("id", 0);
@@ -107,7 +111,14 @@ public class UpdateActivity extends AppCompatActivity {
                     Contact newContact = new Contact();
                     newContact.setName(newName);
                     newContact.setPhone(newPhone);
-//                    newContact.setProfile(newProfile.toString());
+                    if (newProfile == null) {
+                        newContact.setProfile("null");
+                    } else {
+                        newContact.setProfile(newProfile.toString());
+                    }
+//                    Glide.with(view)
+//                            .load(newProfile)
+//                            .into(newContact);
 
                     ContactDB.getInstance(context).contactDAO().insert(newContact);
                 } else {

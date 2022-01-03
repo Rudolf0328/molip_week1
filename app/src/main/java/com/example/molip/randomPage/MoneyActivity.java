@@ -50,6 +50,8 @@ public class MoneyActivity extends AppCompatActivity {
         btnGo = (Button) findViewById(R.id.money_btn_go);
         llName = (LinearLayout) findViewById(R.id.money_ll_name);
 
+        etTotal.addTextChangedListener(new CustomTextWatcher(etTotal));
+
         btnGood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
