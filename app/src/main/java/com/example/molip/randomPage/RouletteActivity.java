@@ -1,9 +1,11 @@
 package com.example.molip.randomPage;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -20,6 +22,7 @@ public class RouletteActivity extends AppCompatActivity{
     ImageView back;
     ImageView ranimg;
     TextView text;
+    Button button;
     int[] img = {R.drawable.camera, R.drawable.gallery, R.drawable.img_contact, R.drawable.girl, R.drawable.boy};
     ViewFlipper vfllipper;
     @Override
@@ -36,11 +39,13 @@ public class RouletteActivity extends AppCompatActivity{
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeLayout);
         System.out.println("4!!!");
 
-
+        button = (Button) findViewById(R.id.buttonsearch);
+        button.setVisibility(View.INVISIBLE);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                button.setVisibility(View.INVISIBLE);
                 ImageView a1=(ImageView)findViewById(R.id.ran1);
                 ImageView a2=(ImageView)findViewById(R.id.ran2);
                 ImageView a3=(ImageView)findViewById(R.id.ran3);
@@ -68,7 +73,7 @@ public class RouletteActivity extends AppCompatActivity{
                 //int[] flipimg = new int[10][2] {{R.drawable.chicken,1}, {R.drawable.pizza,2}, R.drawable.ddokk, R.drawable.rice, R.drawable.hamburger, R.drawable.sandwich, R.drawable.sushi, R.drawable.steak, R.drawable.pasta, R.drawable.bread};
                 int[][] flipimg = new int[][] {{R.drawable.chicken,1}, {R.drawable.pizza,2}, {R.drawable.ddokk,3}, {R.drawable.rice,4}, {R.drawable.hamburger,5}, {R.drawable.sandwich,6}, {R.drawable.sushi,7}, {R.drawable.steak,8}, {R.drawable.pasta,9}, {R.drawable.bread,10}};
                 String[] fliptext = {"치킨","피자","떡볶이","백반","햄버거","샌드위치","초밥","스테이크","파스타","빵"};
-                String[] rantext = {"먹어.","어때?","먹자.","먹을까?","고고!"};
+                String[] rantext = {"먹어.","어때?","먹자!","먹을까?","고고!","별로야?"};
                 ranimg = (ImageView) findViewById(R.id.ranimage);
                 ranimg.setVisibility(View.INVISIBLE);
                 text.setVisibility(View.INVISIBLE);
@@ -113,9 +118,20 @@ public class RouletteActivity extends AppCompatActivity{
                         text.setText(fliptext[last]+" "+rantext[num]);
                         System.out.println("!!!");
                         System.out.println(last);
+                        button.setVisibility(View.VISIBLE);
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 }, 2000);
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), NaverActivity.class);
+                        intent.putExtra("음식",fliptext[last]);
+                        System.out.println(fliptext[last]);
+                        startActivity(intent);
+                    }
+                });
 
 
 //                for(int i=0; i< images.length; i++ ) {

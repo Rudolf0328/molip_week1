@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/gifview"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:adjustViewBounds="true"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        tools:ignore="ContentDescription,MissingConstraints"
+        tools:srcCompat="@tools:sample/avatars"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,9 +24,9 @@
             android:id="@+id/button1"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
             android:scaleType="fitCenter"
             android:src="@drawable/gallery"
             android:visibility="visible" />
@@ -24,11 +35,11 @@
             android:id="@+id/button2"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:src="@drawable/camera"
+            android:layout_marginBottom="15dp"
             android:scaleType="fitCenter"
+            android:src="@drawable/camera"
             android:visibility="visible" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

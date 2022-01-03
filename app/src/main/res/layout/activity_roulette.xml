@@ -92,6 +92,7 @@
             tools:ignore="ContentDescription,MissingConstraints"
             tools:srcCompat="@tools:sample/avatars" />
 
+
         <TextView
             android:id="@+id/textfood"
             android:layout_width="match_parent"
@@ -99,6 +100,14 @@
             android:textSize="40sp"
             android:layout_marginTop="400dp"
             android:gravity="center_horizontal"/>
+
+        <Button
+            android:id="@+id/buttonsearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="500dp"
+            android:gravity="center_horizontal"
+            android:text="맛집 알아보기" />
 
     </RelativeLayout>
 
