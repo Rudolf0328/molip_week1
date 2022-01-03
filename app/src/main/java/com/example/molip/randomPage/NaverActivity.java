@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class NaverActivity extends AppCompatActivity {
-    ListView listview;
     MyAsyncTask task;
     String food;
     TextView text1;
@@ -30,12 +28,20 @@ public class NaverActivity extends AppCompatActivity {
     TextView text4;
     TextView text5;
     TextView text6;
+    TextView text7;
+    TextView text8;
+    TextView text9;
+    TextView text10;
     String item1;
     String item2;
     String item3;
     String item4;
     String item5;
     String item6;
+    String item7;
+    String item8;
+    String item9;
+    String item10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +82,7 @@ public class NaverActivity extends AppCompatActivity {
                 System.out.println(para[0]);
                 String text = URLEncoder.encode("카이스트 "+para[0], "UTF-8");
                 System.out.println(text);
-                String apiURL = "https://openapi.naver.com/v1/search/local?query="+ text + "&display=3&sort=random"; // json 결과
+                String apiURL = "https://openapi.naver.com/v1/search/local?query="+ text + "&display=5&sort=random"; // json 결과
                 //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
                 URL url = new URL(apiURL);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -102,7 +108,7 @@ public class NaverActivity extends AppCompatActivity {
                 System.out.println(jsonstring);
                 JSONObject jsonObject = new JSONObject(jsonstring);
                 JSONArray jsonArray = jsonObject.getJSONArray("items");
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 5; i++) {
                     JSONObject object = (JSONObject) jsonArray.get(i);
 
                     String getTitle = (String) object.get("title");
@@ -122,9 +128,16 @@ public class NaverActivity extends AppCompatActivity {
                     }else if(i==1){
                         item3 = title;
                         item4 = address;
-                    }else {
+                    }else if(i==2){
                         item5 = title;
                         item6 = address;
+                    }else if(i==3){
+                        item7 = title;
+                        item8 = address;
+                    }
+                    else {
+                        item9 = title;
+                        item10 = address;
                     }
 
                 }

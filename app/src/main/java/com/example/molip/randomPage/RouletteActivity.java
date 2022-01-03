@@ -2,12 +2,15 @@ package com.example.molip.randomPage;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +18,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.molip.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Random;
 
 public class RouletteActivity extends AppCompatActivity{
@@ -22,9 +33,33 @@ public class RouletteActivity extends AppCompatActivity{
     ImageView back;
     ImageView ranimg;
     TextView text;
-    Button button;
-    int[] img = {R.drawable.camera, R.drawable.gallery, R.drawable.img_contact, R.drawable.girl, R.drawable.boy};
+    MyAsyncTask task;
+    TextView text1;
+    TextView text2;
+    TextView text3;
+    TextView text4;
+    TextView text5;
+    TextView text6;
+    TextView text7;
+    TextView text8;
+    TextView text9;
+    TextView text10;
+
+    String item1;
+    String item2;
+    String item3;
+    String item4;
+    String item5;
+    String item6;
+    String item7;
+    String item8;
+    String item9;
+    String item10;
+
+    String link1, link2, link3, link4, link5;
+
     ViewFlipper vfllipper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +74,108 @@ public class RouletteActivity extends AppCompatActivity{
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeLayout);
         System.out.println("4!!!");
 
-        button = (Button) findViewById(R.id.buttonsearch);
-        button.setVisibility(View.INVISIBLE);
+        //합치는 부분
+        Intent intent = getIntent();
+        String food = getIntent().getStringExtra("음식");
+        System.out.println(food);
+        System.out.println("here2222!!!");
+
+        text1= (TextView)findViewById(R.id.item1);
+        text2= (TextView)findViewById(R.id.item2);
+        text3= (TextView)findViewById(R.id.item3);
+        text4= (TextView)findViewById(R.id.item4);
+        text5= (TextView)findViewById(R.id.item5);
+        text6= (TextView)findViewById(R.id.item6);
+        text7= (TextView)findViewById(R.id.item7);
+        text8= (TextView)findViewById(R.id.item8);
+        text9= (TextView)findViewById(R.id.item9);
+        text10= (TextView)findViewById(R.id.item10);
+        System.out.println(link1);
+        text1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(link1);
+                if(link1.equals("")) {
+                    System.out.println("else");
+                    Toast.makeText(RouletteActivity.this, "링크가 없어요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    Intent intent1 = new Intent(Intent.ACTION_VIEW);
+                    intent1.setData(Uri.parse(link1));
+                    startActivity(intent1);
+                }
+            }
+        });
+        text2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(link2);
+                if(link2.equals("")) {
+                    System.out.println("else");
+                    Toast.makeText(RouletteActivity.this, "링크가 없어요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    Intent intent2 = new Intent(Intent.ACTION_VIEW);
+                    intent2.setData(Uri.parse(link2));
+                    startActivity(intent2);
+                }
+            }
+        });
+        text3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(link3);
+                if(link3.equals("")) {
+                    System.out.println("else");
+                    Toast.makeText(RouletteActivity.this, "링크가 없어요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    Intent intent3 = new Intent(Intent.ACTION_VIEW);
+                    intent3.setData(Uri.parse(link3));
+                    startActivity(intent3);
+                }
+            }
+        });
+        text4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(link4);
+                if(link4.equals("")) {
+                    System.out.println("else");
+                    Toast.makeText(RouletteActivity.this, "링크가 없어요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    Intent intent4 = new Intent(Intent.ACTION_VIEW);
+                    intent4.setData(Uri.parse(link4));
+                    startActivity(intent4);
+                }
+            }
+        });
+        text5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(link5);
+                if(link5.equals("")) {
+                    System.out.println("else");
+                    Toast.makeText(RouletteActivity.this, "링크가 없어요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    Intent intent5 = new Intent(Intent.ACTION_VIEW);
+                    intent5.setData(Uri.parse(link5));
+                    startActivity(intent5);
+                }
+            }
+        });
+
+//        task = new RouletteActivity.MyAsyncTask();
+//        task.execute(food);
+        System.out.println("item1");
+
+        //합치는 부분
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                button.setVisibility(View.INVISIBLE);
                 ImageView a1=(ImageView)findViewById(R.id.ran1);
                 ImageView a2=(ImageView)findViewById(R.id.ran2);
                 ImageView a3=(ImageView)findViewById(R.id.ran3);
@@ -77,6 +207,17 @@ public class RouletteActivity extends AppCompatActivity{
                 ranimg = (ImageView) findViewById(R.id.ranimage);
                 ranimg.setVisibility(View.INVISIBLE);
                 text.setVisibility(View.INVISIBLE);
+                text1.setVisibility(View.INVISIBLE);
+                text2.setVisibility(View.INVISIBLE);
+                text3.setVisibility(View.INVISIBLE);
+                text4.setVisibility(View.INVISIBLE);
+                text5.setVisibility(View.INVISIBLE);
+                text6.setVisibility(View.INVISIBLE);
+                text7.setVisibility(View.INVISIBLE);
+                text8.setVisibility(View.INVISIBLE);
+                text9.setVisibility(View.INVISIBLE);
+                text10.setVisibility(View.INVISIBLE);
+
                 shuffleArray(flipimg,fliptext);
                 a1.setImageResource(flipimg[0][0]);
                 a2.setImageResource(flipimg[1][0]);
@@ -113,25 +254,28 @@ public class RouletteActivity extends AppCompatActivity{
                         vfllipper.stopFlipping();
                         back.setImageResource(0);
                         text.setVisibility(View.VISIBLE);
+                        text1.setVisibility(View.VISIBLE);
+                        text2.setVisibility(View.VISIBLE);
+                        text3.setVisibility(View.VISIBLE);
+                        text4.setVisibility(View.VISIBLE);
+                        text5.setVisibility(View.VISIBLE);
+                        text6.setVisibility(View.VISIBLE);
+                        text7.setVisibility(View.VISIBLE);
+                        text8.setVisibility(View.VISIBLE);
+                        text9.setVisibility(View.VISIBLE);
+                        text10.setVisibility(View.VISIBLE);
+
                         Random ran = new Random();
                         int num = ran.nextInt(rantext.length);
                         text.setText(fliptext[last]+" "+rantext[num]);
                         System.out.println("!!!");
                         System.out.println(last);
-                        button.setVisibility(View.VISIBLE);
+                        task = new RouletteActivity.MyAsyncTask();
+                        task.execute(fliptext[last]);
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 }, 2000);
 
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), NaverActivity.class);
-                        intent.putExtra("음식",fliptext[last]);
-                        System.out.println(fliptext[last]);
-                        startActivity(intent);
-                    }
-                });
 
 
 //                for(int i=0; i< images.length; i++ ) {
@@ -154,6 +298,111 @@ public class RouletteActivity extends AppCompatActivity{
             ar[index][0] = ar[i][0];
             ar[index][1] = ar[i][1];
             ar[i][0] = a0;ar[i][1] = a1;
+        }
+    }
+
+    private class MyAsyncTask extends AsyncTask<String, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(String... para) {
+            System.out.println("here1111!!!");
+            String clientId = "aTSaWfizIujYql3MUQoI";//애플리케이션 클라이언트 아이디값";
+            String clientSecret = "zF1lB7FkuW";//애플리케이션 클라이언트 시크릿값";
+            try {
+                System.out.println("try!!!!!");
+                System.out.println(para[0]);
+                String text = URLEncoder.encode("카이스트 "+para[0], "UTF-8");
+                System.out.println(text);
+                String apiURL = "https://openapi.naver.com/v1/search/local?query="+ text + "&display=5&sort=random"; // json 결과
+                //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
+                URL url = new URL(apiURL);
+                HttpURLConnection con = (HttpURLConnection)url.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("X-Naver-Client-Id", clientId);
+                con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
+                int responseCode = con.getResponseCode();
+                BufferedReader br;
+                if(responseCode==200) { // 정상 호출
+                    br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                } else {  // 에러 발생
+                    br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+                }
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+                while ((inputLine = br.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                br.close();
+                System.out.println("here!!!");
+                System.out.println(response.toString());
+                String jsonstring = response.toString();
+                System.out.println(jsonstring);
+                JSONObject jsonObject = new JSONObject(jsonstring);
+                JSONArray jsonArray = jsonObject.getJSONArray("items");
+                for (int i = 0; i < 5; i++) {
+                    JSONObject object = (JSONObject) jsonArray.get(i);
+
+                    String getTitle = (String) object.get("title");
+                    String address = (String) object.get("address");
+                    String link = (String) object.get("link");
+
+                    String titleFilter = getTitle.replaceAll("<b>", "");
+                    String title = titleFilter.replaceAll("</b>", "");
+
+                    Log.e("test", title);
+                    Log.e("test", address);
+                    Log.e("test", link);
+                    System.out.println(title);
+                    if(i == 0){
+                        item1 = title;
+                        item2 = address;
+                        link1 = link;
+                        System.out.println(link);
+                    }else if(i==1){
+                        item3 = title;
+                        item4 = address;
+                        link2 = link;
+                    }else if(i==2){
+                        item5 = title;
+                        item6 = address;
+                        link3 = link;
+                    }else if(i==3){
+                        item7 = title;
+                        item8 = address;
+                        link4 = link;
+                    }
+                    else {
+                        item9 = title;
+                        item10 = address;
+                        link5 = link;
+                    }
+
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            text1.setText(item1);
+            text2.setText(item2);
+            text3.setText(item3);
+            text4.setText(item4);
+            text5.setText(item5);
+            text6.setText(item6);
+            text7.setText(item7);
+            text8.setText(item8);
+            text9.setText(item9);
+            text10.setText(item10);
+
         }
     }
 //    static void shuffleArray (int[] ar, String[] ar2) {
