@@ -26,7 +26,6 @@
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:ems="10"
-        android:inputType="number"
         android:textAlignment="textEnd"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"

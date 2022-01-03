@@ -35,6 +35,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import com.bumptech.glide.Glide;
 import com.example.molip.MainActivity;
 import com.example.molip.R;
 import com.example.molip.phonePage.DetailActivity;
@@ -94,10 +95,17 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
             //TODO: 글라이드
             if(contact.getProfile() == null || contact.getProfile().equals("null")) {
                 int resourceId = R.drawable.img_default;
-                imgProfile.setImageResource(resourceId);
+                Glide.with(itemView)
+                        .load(resourceId)
+                        .into(imgProfile);
+//                imgProfile.setImageResource(resourceId);
             } else {
-                Uri p = Uri.parse(contact.getProfile());
-                System.out.println(p);
+//                Uri p = Uri.parse(contact.getProfile());
+//                context.getContentResolver().takePersistableUriPermission(p, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                Glide.with(itemView)
+                        .load(contact.getProfile())
+                        .into(imgProfile);
+//                System.out.println(p);
 
 //                TedPermission.with(context.getApplicationContext())
 //                        .setPermissionListener(permissionListener)
@@ -107,7 +115,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
 //                        .check();
 
 //                context.getContentResolver().takePersistableUriPermission(p, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                imgProfile.setImageURI(p);
+//                imgProfile.setImageURI(contact.getProfile());
             }
 
             btnCall.setOnClickListener(new View.OnClickListener() {

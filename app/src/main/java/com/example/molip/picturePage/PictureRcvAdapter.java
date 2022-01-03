@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.molip.R;
 import com.example.molip.phonePage.data.Contact;
 import com.example.molip.picturePage.data.Image;
+import com.example.molip.picturePage.data.ImageDB;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -64,7 +65,7 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
 
         }
 
-        void onBind(Bitmap bitmap, final int position) {
+        void onBind(Image image, final int position) {
             System.out.println(position);
             System.out.println(imageList);
 //            final Bitmap imageData = imageList.get(position);
@@ -74,7 +75,7 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
 //            System.out.println(holder.imgProfile);
             if(imageList != null){
                 System.out.println("hereherehere");
-                imgProfile.setImageBitmap(bitmap);
+                imgProfile.setImageBitmap(image.getImg());
             }else{
 
             }
@@ -82,13 +83,16 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+//                    int id = ImageDB.getInstance(context).imageDao().getContact()
+//                    int id = imageList.get(position).imageId;
                     Intent intent2 = new Intent(context, ImageDetail.class);
                     intent2.putExtra("position", position);
-                    intent2.putExtra("image", bitmap);
+                    intent2.putExtra("image", image.getImg());
 //                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
 //                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
 //                    byte[] byteArray = stream.toByteArray();
 //                    intent.putExtra("image",byteArray);
+                    System.out.println("index : " + position);
                     ((Activity)context).startActivityForResult(intent2, PictureManager.RQ_PIC_TO_DETAIL);
                 }
             });
@@ -103,6 +107,8 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
                     dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+//                            Image image = ImageDB.getInstance(context).imageDao().getContact(position);
+                            ImageDB.getInstance(context).imageDao().delete(image);
                             removeItemView(position);
                         }
                     });
@@ -123,7 +129,7 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, final int position) {
         System.out.println("onbindviewholder");
 //        Bitmap bitmap = StringToBitmap();
-        holder.onBind(imageList.get(position).getImg(), position);
+        holder.onBind(imageList.get(position), position);
     }
 
     private void removeItemView(int position) {
