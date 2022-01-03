@@ -133,6 +133,8 @@ public class MoneyActivity extends AppCompatActivity {
                 ArrayList<Double> ratios = new ArrayList<>(num);
                 String totalString = etTotal.getText().toString();
 
+                totalString = totalString.replace(",", "");
+
                 totalString = totalString.trim();
 
                 if (totalString.getBytes().length <= 0) {
@@ -151,88 +153,104 @@ public class MoneyActivity extends AppCompatActivity {
                         double ratio = 1.0 / num;
                         int test = 0;
                         System.out.println("ratio : " + ratio);
-                        switch (level) {
-                            case 0:
-                                low = avgInt - (avgInt * 0.1);
-                                high = avgInt + (avgInt * 0.1);
 
-                                for (int i = 0; i < num; i++) {
-                                    double tmp = Math.random() * (high - low) + low;
+                        int ha = 0;
+                        while (ha == 0) {
+                            ha = 1;
+                            switch (level) {
+                                case 0:
+                                    low = avgInt - (avgInt * 0.1);
+                                    high = avgInt + (avgInt * 0.1);
+
+                                    for (int i = 0; i < num; i++) {
+                                        double tmp = Math.random() * (high - low) + low;
 //                            ratios.add(tmp);
-                                    prices.add((int) (tmp));
-                                }
+                                        prices.add((int) (tmp));
+                                    }
 
-                                for (int i = 0; i < num; i++) {
-                                    test += prices.get(i);
-                                }
+                                    for (int i = 0; i < num; i++) {
+                                        test += prices.get(i);
+                                    }
 
-                                if (test > total) {
-                                    int diff = test - total;
-                                    System.out.println("1. " + diff);
-                                    int max = Collections.max(prices);
-                                    int index = prices.indexOf(max);
-                                    prices.remove(index);
-                                    prices.add(index, max - diff);
-                                } else if (test < total) {
-                                    int diff = total - test;
-                                    System.out.println("2. " + diff);
-                                    int min = Collections.min(prices);
-                                    int index = prices.indexOf(min);
-                                    prices.remove(index);
-                                    prices.add(index, min + diff);
-                                }
+                                    if (test > total) {
+                                        int diff = test - total;
+                                        System.out.println("1. " + diff);
+                                        int max = Collections.max(prices);
+                                        int index = prices.indexOf(max);
+                                        prices.remove(index);
+                                        prices.add(index, max - diff);
+                                    } else if (test < total) {
+                                        int diff = total - test;
+                                        System.out.println("2. " + diff);
+                                        int min = Collections.min(prices);
+                                        int index = prices.indexOf(min);
+                                        prices.remove(index);
+                                        prices.add(index, min + diff);
+                                    }
 
-                                break;
-                            case 1:
-                                low = avgInt - (avgInt * 0.5);
-                                high = avgInt + (avgInt * 0.5);
+                                    break;
+                                case 1:
+                                    low = avgInt - (avgInt * 0.5);
+                                    high = avgInt + (avgInt * 0.5);
 
-                                for (int i = 0; i < num; i++) {
-                                    double tmp = Math.random() * (high - low) + low;
+                                    for (int i = 0; i < num; i++) {
+                                        double tmp = Math.random() * (high - low) + low;
 //                            ratios.add(tmp);
-                                    prices.add((int) (tmp));
-                                }
+                                        prices.add((int) (tmp));
+                                    }
 
-                                test = 0;
+                                    test = 0;
 
-                                for (int i = 0; i < num; i++) {
-                                    test += prices.get(i);
-                                }
+                                    for (int i = 0; i < num; i++) {
+                                        test += prices.get(i);
+                                    }
 
-                                if (test > total) {
-                                    int diff = test - total;
-                                    System.out.println("1. " + diff);
-                                    int min = Collections.min(prices);
-                                    int index = prices.indexOf(min);
-                                    prices.remove(index);
-                                    prices.add(index, min - diff);
-                                } else if (test < total) {
-                                    int diff = total - test;
-                                    System.out.println("2. " + diff);
-                                    int max = Collections.max(prices);
-                                    int index = prices.indexOf(max);
-                                    prices.remove(index);
-                                    prices.add(index, max + diff);
-                                }
-                                break;
-                            case 2:
-                                int tmp = (int) (Math.random() * num);
-                                System.out.println(tmp);
+                                    if (test > total) {
+                                        int diff = test - total;
+                                        System.out.println("1. " + diff);
+                                        int min = Collections.min(prices);
+                                        int index = prices.indexOf(min);
+                                        prices.remove(index);
+                                        prices.add(index, min - diff);
+                                    } else if (test < total) {
+                                        int diff = total - test;
+                                        System.out.println("2. " + diff);
+                                        int max = Collections.max(prices);
+                                        int index = prices.indexOf(max);
+                                        prices.remove(index);
+                                        prices.add(index, max + diff);
+                                    }
+                                    break;
+                                case 2:
+                                    int tmp = (int) (Math.random() * num);
+                                    System.out.println(tmp);
 
-                                for (int i = 0; i < num - 1; i++) {
-                                    prices.add(0);
+                                    for (int i = 0; i < num - 1; i++) {
+                                        prices.add(0);
+                                    }
+                                    prices.add(tmp, total);
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            for (int i = 0; i < num; i++) {
+                                if (prices.get(i) < 0) {
+                                    System.out.println("------------------- error --------------------");
+                                    System.out.println(prices);
+                                    prices.clear();
+                                    System.out.println(prices);
+                                    ha = 0;
+                                    break;
                                 }
-                                prices.add(tmp, total);
-                                break;
-                            default:
-                                break;
+                            }
                         }
-
                         int testtest = 0;
 
                         for (int i = 0; i < num; i++) {
                             testtest += prices.get(i);
                         }
+
 
                         System.out.println("adjust : " + testtest);
 
