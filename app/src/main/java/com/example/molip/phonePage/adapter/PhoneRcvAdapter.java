@@ -28,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,17 +40,22 @@ import com.example.molip.R;
 import com.example.molip.phonePage.DetailActivity;
 import com.example.molip.phonePage.Manager;
 import com.example.molip.phonePage.PhoneActivity;
+import com.example.molip.phonePage.data.Contact;
+import com.example.molip.phonePage.data.ContactDB;
 import com.example.molip.phonePage.data.PhoneData;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
+import java.security.Permission;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHolder> {
-    private ArrayList<PhoneData> phoneList;
-    private Context context;
-    public PhoneRcvAdapter(ArrayList<PhoneData> phoneList, Context context) {
-        System.out.println(phoneList);
-        this.phoneList = phoneList;
-        this.context = context;
+    private List<Contact> phoneList;
+
+    public void submitList(List<Contact> list) {
+        phoneList = list;
+        notifyDataSetChanged();
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,6 +65,9 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
     }
 
     public int getItemCount() {
+        if (phoneList == null) {
+            return 0;
+        }
         return phoneList.size();
     }
 
@@ -65,6 +75,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
         ImageView imgProfile;
         ImageButton btnCall, btnMsg;
         TextView tvName, tvPhoneNum;
+        Context context;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,137 +84,128 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
             btnMsg = (ImageButton) itemView.findViewById(R.id.item_btn_msg);
             tvName = (TextView) itemView.findViewById(R.id.item_tv_name);
             tvPhoneNum = (TextView) itemView.findViewById(R.id.item_tv_phone_num);
-        }
-    }
-
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        final PhoneData phoneData = phoneList.get(position);
-        System.out.println("pd: " + phoneData);
-        holder.tvName.setText(phoneData.getName());
-        holder.tvPhoneNum.setText(phoneData.getPhoneNum());
-        if(phoneData.getProfileRes().equals("null")) {
-            int resourceId = R.drawable.img_default;
-            holder.imgProfile.setImageResource(resourceId);
-        } else {
-            holder.imgProfile.setImageURI(Uri.parse(phoneData.getProfileRes()));
+            context = itemView.getContext();
         }
 
-        System.out.println("img: " + phoneData.getProfileRes());
+        void onBind(Contact contact) {
+            tvName.setText(contact.getName());
+            tvPhoneNum.setText(contact.getPhone());
 
-        holder.btnCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + phoneData.getPhoneNum()));
-                context.startActivity(callIntent);
+            //TODO: 글라이드
+            if(contact.getProfile() == null || contact.getProfile().equals("null")) {
+                int resourceId = R.drawable.img_default;
+                imgProfile.setImageResource(resourceId);
+            } else {
+                Uri p = Uri.parse(contact.getProfile());
+                System.out.println(p);
+
+//                TedPermission.with(context.getApplicationContext())
+//                        .setPermissionListener(permissionListener)
+//                        .setRationaleMessage("카메라 권한이 필요합니다.")
+//                        .setDeniedMessage("카메라 권한을 거부하셨습니다.")
+//                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+//                        .check();
+
+//                context.getContentResolver().takePersistableUriPermission(p, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                imgProfile.setImageURI(p);
             }
-        });
 
-        holder.btnMsg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent msgIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneData.getPhoneNum()));
-                context.startActivity(msgIntent);
-            }
-        });
+            btnCall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + contact.getPhone()));
+                    context.startActivity(callIntent);
+                }
+            });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            btnMsg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent msgIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + contact.getPhone()));
+                    context.startActivity(msgIntent);
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 //                FragmentManager fm = ;
 //                FragmentTransaction ft = fm.beginTransaction();
 //                DetailActivity detailActivity = new DetailActivity();
 //                ft.replace(Manager.RC_CA_TO_DETAIL, detailActivity);
 //                ft.commit();
 //                activity.get
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("position", position);
-                intent.putExtra("name", phoneData.getName());
-                intent.putExtra("phone", phoneData.getPhoneNum());
-                intent.putExtra("profile", phoneData.getProfileRes());
-                ((Activity)context).startActivityForResult(intent, Manager.RC_CA_TO_DETAIL);
-            }
-        });
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    System.out.println("idid : " + contact.contactId);
+                    intent.putExtra("id", contact.contactId);
+                    intent.putExtra("name", contact.getName());
+                    intent.putExtra("phone", contact.getPhone());
+                    intent.putExtra("profile", contact.getProfile());
+//                    intent.putExtra("position", position);
+//                    intent.putExtra("name", phoneData.getName());
+//                    intent.putExtra("phone", phoneData.getPhoneNum());
+//                    intent.putExtra("profile", phoneData.getProfileRes());
+                    ((Activity)context).startActivityForResult(intent, Manager.RC_CA_TO_DETAIL);
+//                    notifyDataSetChanged();
+                }
+            });
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
 
-                dialog.setMessage("정말로 삭제하시겠습니까?");
-                dialog.setCancelable(true);
-                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        removeItemView(position);
-                    }
-                });
+                    dialog.setMessage("정말로 삭제하시겠습니까?");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            phoneList.remove(contact);
+                            ContactDB.getInstance(context).contactDAO().delete(contact);
+                            notifyDataSetChanged();
+                        }
+                    });
 
-                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                dialog.show();
-                return false;
-            }
-        });
+                    dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    dialog.show();
+                    return false;
+                }
+            });
+        }
+    }
+
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.onBind(phoneList.get(position));
+
+
+
+//        System.out.println("img: " + phoneData.getProfileRes());
+
+
     }
 
     private void removeItemView(int position) {
         phoneList.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, phoneList.size());
+        notifyDataSetChanged();
+//        notifyItemRemoved(position);
+//        notifyItemRangeChanged(position, phoneList.size());
     }
 
-    public Bitmap loadContactPhoto(ContentResolver cr, long id, long photo_id) {
-        byte[] photoBytes = null;
-        Uri photoUri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, photo_id);
-        Cursor c = cr.query(photoUri, new String[]{ContactsContract.CommonDataKinds.Photo.PHOTO}, null, null, null);
-        try {
-            if (c.moveToFirst())
-                photoBytes = c.getBlob(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            c.close();
-        }
-
-        if(photoBytes != null) {
-            return resizingBitmap(BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.length));
-        } else
-            Log.d("PHOTO", "fail");
-
-        return null;
-    }
-
-    public Bitmap resizingBitmap(Bitmap oBitmap) {
-        if (oBitmap == null) {
-            return null;
-        }
-
-        float width = oBitmap.getWidth();
-        float height = oBitmap.getHeight();
-        float resizing_size = 120;
-
-        Bitmap rBitmap = null;
-        if (width > resizing_size) {
-            float mWidth = (float) (width / 100);
-            float fScale = (float) (resizing_size / mWidth);
-            width *= (fScale / 100);
-            height *= (fScale / 100);
-        } else if (height > resizing_size){
-            float mHeight = (float) (height / 100);
-            float fScale = (float) (resizing_size / mHeight);
-
-            width *= (fScale / 100);
-            height *= (fScale / 100);
-        }
-
-        rBitmap = Bitmap.createScaledBitmap(oBitmap, (int) width, (int) height, true);
-        return rBitmap;
-    }
-
-
+//    PermissionListener permissionListener = new PermissionListener() {
+//        @Override
+//        public void onPermissionGranted() {
+////            Toast.makeText(, "권한이 허용됨", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        @Override
+//        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+////            Toast.makeText(getApplicationContext(), "권한이 거부됨", Toast.LENGTH_SHORT).show();
+//        }
+//    };
 
 }
