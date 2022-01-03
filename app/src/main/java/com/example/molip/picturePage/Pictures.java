@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.molip.R;
+import com.example.molip.picturePage.data.Image;
+import com.example.molip.picturePage.data.ImageDB;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Pictures extends Fragment {
     ImageView imageView;
@@ -28,12 +34,15 @@ public class Pictures extends Fragment {
     ImageButton button2;
     PictureRcvAdapter picadapter;
     RecyclerView rcvpictures;
-    ArrayList<Bitmap> bitmaps = new ArrayList<>();
+//    ArrayList<Image> imageList;
+//    ArrayList<Bitmap> bitmaps = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup imgview = (ViewGroup) inflater.inflate(R.layout.pictures, container, false);
         imageView = (ImageView) imgview.findViewById(R.id.image);
         rcvpictures = (RecyclerView) imgview.findViewById(R.id.tab2_rcv);
+        picadapter = new PictureRcvAdapter();
+        rcvpictures.setAdapter(picadapter);
         button = (ImageButton) imgview.findViewById(R.id.button);
         button2 = (ImageButton) imgview.findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +64,14 @@ public class Pictures extends Fragment {
         });
         return imgview;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<Image> imageList = ImageDB.getInstance(getContext()).imageDao().getAll();
+        picadapter.submitList(imageList);
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
         if (requestCode == 1) {
@@ -69,7 +86,10 @@ public class Pictures extends Fragment {
                     try {
                         InputStream inputStream = getActivity().getContentResolver().openInputStream(imageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        bitmaps.add(bitmap);
+                        Image newImage = new Image();
+                        newImage.setImg(bitmap);
+                        ImageDB.getInstance(getContext()).imageDao().insert(newImage);
+//                        bitmaps.add(bitmap);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -81,14 +101,21 @@ public class Pictures extends Fragment {
                 try {
                     InputStream inputStream = getActivity().getContentResolver().openInputStream(imageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    bitmaps.add(bitmap);
+                    // TODO
+                    Image newImage = new Image();
+                    newImage.setImg(bitmap);
+                    System.out.println("wow : " + newImage.getImg());
+                    ImageDB.getInstance(getContext()).imageDao().insert(newImage);
+//                    picadapter.submitList(imageList);
+//                    System.out.println("dk" + ImageDB.getInstance(getContext()).imageDao().getAll());
+//                    bitmaps.add(bitmap);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
 
             }
-            picadapter = new PictureRcvAdapter(bitmaps, getActivity());
-            rcvpictures.setAdapter(picadapter);
+//            picadapter = new PictureRcvAdapter();
+//            rcvpictures.setAdapter(picadapter);
 //            new Thread(new Runnable() {
 //                @Override
 //                public void run() {
@@ -121,5 +148,13 @@ public class Pictures extends Fragment {
 //                }
 //            }
         }
+    }
+
+    public static String BitmapToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 70, baos);
+        byte[] bytes = baos.toByteArray();
+        String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
+        return temp;
     }
 }
