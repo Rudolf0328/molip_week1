@@ -83,15 +83,24 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
         }
 
         void onBind(Contact contact) {
-            tvName.setText(contact.name);
-            tvPhoneNum.setText(contact.phone);
-//            imgProfile.
+            tvName.setText(contact.getName());
+            tvPhoneNum.setText(contact.getPhone());
+
             //TODO: 글라이드
+            if(contact.getProfile() == null || contact.getProfile().equals("null")) {
+                int resourceId = R.drawable.img_default;
+                imgProfile.setImageResource(resourceId);
+            } else {
+                Uri p = Uri.parse(contact.getProfile());
+                System.out.println(p);
+//                context.getContentResolver().takePersistableUriPermission(p, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                imgProfile.setImageURI(p);
+            }
 
             btnCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + contact.phone));
+                    Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + contact.getPhone()));
                     context.startActivity(callIntent);
                 }
             });
@@ -99,7 +108,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
             btnMsg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent msgIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + contact.phone));
+                    Intent msgIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + contact.getPhone()));
                     context.startActivity(msgIntent);
                 }
             });
@@ -114,13 +123,17 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
 //                ft.commit();
 //                activity.get
                     Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra("name", contact.name);
-                    intent.putExtra("phone", contact.phone);
+                    System.out.println("idid : " + contact.contactId);
+                    intent.putExtra("id", contact.contactId);
+                    intent.putExtra("name", contact.getName());
+                    intent.putExtra("phone", contact.getPhone());
+                    intent.putExtra("profile", contact.getProfile());
 //                    intent.putExtra("position", position);
 //                    intent.putExtra("name", phoneData.getName());
 //                    intent.putExtra("phone", phoneData.getPhoneNum());
 //                    intent.putExtra("profile", phoneData.getProfileRes());
                     ((Activity)context).startActivityForResult(intent, Manager.RC_CA_TO_DETAIL);
+//                    notifyDataSetChanged();
                 }
             });
 
@@ -156,12 +169,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.onBind(phoneList.get(position));
 
-//        if(phoneData.getProfileRes().equals("null")) {
-//            int resourceId = R.drawable.img_default;
-//            holder.imgProfile.setImageResource(resourceId);
-//        } else {
-//            holder.imgProfile.setImageURI(Uri.parse(phoneData.getProfileRes()));
-//        }
+
 
 //        System.out.println("img: " + phoneData.getProfileRes());
 

@@ -71,6 +71,8 @@ public class PhoneActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), UpdateActivity.class);
+                intent.putExtra("id", 9999);
+//                intent.putExtra("id", "null");
 //                add.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
                 startActivityForResult(intent, 0);
             }
@@ -109,9 +111,9 @@ public class PhoneActivity extends Fragment {
             }
             System.out.println("image: " + sImage);
 
-            newContact.name = sName;
-            newContact.phone = sNumber;
-            newContact.profile = sImage;
+            newContact.setName(sName);
+            newContact.setPhone(sNumber);
+            newContact.setProfile(sImage);
 
             ContactDB.getInstance(getActivity()).contactDAO().insert(newContact);
             contactList = (ArrayList<Contact>) ContactDB.getInstance(getActivity()).contactDAO().getAll();
@@ -119,7 +121,7 @@ public class PhoneActivity extends Fragment {
             rcvAdapter.submitList(contactList);
 
 //            System.out.println("d : " + contactList);
-            DummyData.dummyList.add(new PhoneData(sImage, sName, sNumber));
+//            DummyData.dummyList.add(new PhoneData(sImage, sName, sNumber));
         }
 
         super.onActivityResult(requestCode, resultCode, data);
