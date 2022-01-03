@@ -12,16 +12,16 @@ public class Contact {
     public int contactId;
 
     @ColumnInfo(name="name")
-    public String name;
+    private String name;
 
     @ColumnInfo(name="phone")
-    public String phone;
+    private String phone;
 
     @ColumnInfo(name="profile")
-    public String profile;
+    private String profile;
 
     @ColumnInfo(name="ban")
-    public String ban;
+    private String ban;
 
     @Override
     public String toString() {
@@ -32,5 +32,37 @@ public class Contact {
                 ", profile='" + profile + '\'' +
                 ", ban='" + ban + '\'' +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
+    public String getBan() {
+        return ban;
+    }
+
+    public void setBan(String ban) {
+        this.ban = ban;
     }
 }
