@@ -41,7 +41,6 @@ public class Pictures extends Fragment {
         ViewGroup imgview = (ViewGroup) inflater.inflate(R.layout.pictures, container, false);
         imageView = (ImageView) imgview.findViewById(R.id.image);
         rcvpictures = (RecyclerView) imgview.findViewById(R.id.tab2_rcv);
-        rcvpictures.setLayoutManager(new LinearLayoutManager(getActivity()));
         picadapter = new PictureRcvAdapter();
         rcvpictures.setAdapter(picadapter);
         button = (ImageButton) imgview.findViewById(R.id.button);

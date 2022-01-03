@@ -18,7 +18,7 @@ public class Image {
 
     @Override
     public String toString() {
-        return "Contact{" +
+        return "IMAGE{" +
                 "imageId=" + imageId +
                 ", profile='" + img + '\'' +
                 '}';

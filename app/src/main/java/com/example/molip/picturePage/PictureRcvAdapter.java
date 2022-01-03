@@ -66,6 +66,7 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
 
         void onBind(Bitmap bitmap, final int position) {
             System.out.println(position);
+            System.out.println(imageList);
 //            final Bitmap imageData = imageList.get(position);
 //            System.out.println("here1");
 //            System.out.println(imageList);
