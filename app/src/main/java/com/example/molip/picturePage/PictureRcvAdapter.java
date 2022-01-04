@@ -15,15 +15,12 @@ import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.molip.R;
-import com.example.molip.phonePage.data.Contact;
 import com.example.molip.picturePage.data.Image;
 import com.example.molip.picturePage.data.ImageDB;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.ViewHolder> {
@@ -75,6 +72,14 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
 //            System.out.println(holder.imgProfile);
             if(imageList != null){
                 System.out.println("hereherehere");
+
+                //new
+                Bitmap temp = image.getImg();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream() ;
+                temp.compress( Bitmap.CompressFormat.JPEG, 30, stream) ;
+                byte[] byteArray = stream.toByteArray() ;
+//                Bitmap rebitmap = BitmapFactory.decodeByteArray( byteArray, 0, byteArray.length ) ;
+                Glide.with(itemView).load(byteArray).into(imgProfile);
                 imgProfile.setImageBitmap(image.getImg());
             }else{
 
@@ -87,11 +92,14 @@ public class PictureRcvAdapter extends RecyclerView.Adapter<PictureRcvAdapter.Vi
 //                    int id = imageList.get(position).imageId;
                     Intent intent2 = new Intent(context, ImageDetail.class);
                     intent2.putExtra("position", position);
-                    intent2.putExtra("image", image.getImg());
-//                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
-//                    byte[] byteArray = stream.toByteArray();
-//                    intent.putExtra("image",byteArray);
+
+                    //수정
+//                    intent2.putExtra("image", image.getImg());
+                    Bitmap bitmap = image.getImg();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
+                    byte[] byteArray = stream.toByteArray();
+                    intent2.putExtra("image",byteArray);
                     System.out.println("index : " + position);
                     ((Activity)context).startActivityForResult(intent2, PictureManager.RQ_PIC_TO_DETAIL);
                 }

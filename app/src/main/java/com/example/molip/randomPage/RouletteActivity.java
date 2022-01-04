@@ -201,8 +201,12 @@ public class RouletteActivity extends AppCompatActivity{
                 a10.setImageResource(0);
 
                 //int[] flipimg = new int[10][2] {{R.drawable.chicken,1}, {R.drawable.pizza,2}, R.drawable.ddokk, R.drawable.rice, R.drawable.hamburger, R.drawable.sandwich, R.drawable.sushi, R.drawable.steak, R.drawable.pasta, R.drawable.bread};
-                int[][] flipimg = new int[][] {{R.drawable.chicken,1}, {R.drawable.pizza,2}, {R.drawable.ddokk,3}, {R.drawable.rice,4}, {R.drawable.hamburger,5}, {R.drawable.sandwich,6}, {R.drawable.sushi,7}, {R.drawable.steak,8}, {R.drawable.pasta,9}, {R.drawable.bread,10}};
-                String[] fliptext = {"치킨","피자","떡볶이","백반","햄버거","샌드위치","초밥","스테이크","파스타","빵"};
+                int[][] flipimg = new int[][] {{R.drawable.chicken,1}, {R.drawable.pizza,2}, {R.drawable.ddokk,3}, {R.drawable.rice,4}, {R.drawable.hamburger,5}, {R.drawable.sandwich,6}, {R.drawable.sushi,7}, {R.drawable.steak,8}, {R.drawable.pasta,9}, {R.drawable.bread,10}, {R.drawable.salad,11} , {R.drawable.curry,12},
+                        {R.drawable.chinese,13}, {R.drawable.maratang,14}, {R.drawable.hotdog,15}, {R.drawable.barbeque,16}, {R.drawable.soup,17}, {R.drawable.bibimbap,18},
+                        {R.drawable.dumpling,19}, {R.drawable.ricenoodle,20}, {R.drawable.knifenoodle,21}, {R.drawable.ramen,22}, {R.drawable.porkfeet,23}, {R.drawable.steamedpork,24},
+                        {R.drawable.jjukkumi,25},};
+                String[] fliptext = {"치킨","피자","떡볶이","백반","햄버거","샌드위치","초밥","스테이크","파스타","빵","샐러드","카레","중국집","마라탕","핫도그","고기","국밥","비빔밥","만두",
+                        "쌀국수","칼국수","라멘","족발","보쌈","쭈꾸미"};
                 String[] rantext = {"먹어.","어때?","먹자!","먹을까?","고고!","별로야?"};
                 ranimg = (ImageView) findViewById(R.id.ranimage);
                 ranimg.setVisibility(View.INVISIBLE);
@@ -351,7 +355,8 @@ public class RouletteActivity extends AppCompatActivity{
                     String link = (String) object.get("link");
 
                     String titleFilter = getTitle.replaceAll("<b>", "");
-                    String title = titleFilter.replaceAll("</b>", "");
+                    String titleFilter2 = titleFilter.replaceAll("amp;", "");
+                    String title = titleFilter2.replaceAll("</b>", "");
 
                     Log.e("test", title);
                     Log.e("test", address);
