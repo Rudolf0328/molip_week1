@@ -149,6 +149,7 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
                     intent.putExtra("name", contact.getName());
                     intent.putExtra("phone", contact.getPhone());
                     intent.putExtra("profile", contact.getProfile());
+                    intent.putExtra("ban", contact.getBan());
 //                    intent.putExtra("position", position);
 //                    intent.putExtra("name", phoneData.getName());
 //                    intent.putExtra("phone", phoneData.getPhoneNum());

@@ -21,8 +21,9 @@
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:text="Name"
-        app:layout_constraintStart_toEndOf="@+id/item_imgv_profile"
+        android:textColor="#000000"
         app:layout_constraintEnd_toStartOf="@+id/item_btn_call"
+        app:layout_constraintStart_toEndOf="@+id/item_imgv_profile"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -32,8 +33,9 @@
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/item_imgv_profile"
+        android:textColor="#000000"
         app:layout_constraintEnd_toStartOf="@+id/item_btn_call"
+        app:layout_constraintStart_toEndOf="@+id/item_imgv_profile"
         app:layout_constraintTop_toBottomOf="@+id/item_tv_name" />
 
     <ImageButton
