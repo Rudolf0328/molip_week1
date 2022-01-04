@@ -204,9 +204,10 @@ public class RouletteActivity extends AppCompatActivity{
                 int[][] flipimg = new int[][] {{R.drawable.chicken,1}, {R.drawable.pizza,2}, {R.drawable.ddokk,3}, {R.drawable.rice,4}, {R.drawable.hamburger,5}, {R.drawable.sandwich,6}, {R.drawable.sushi,7}, {R.drawable.steak,8}, {R.drawable.pasta,9}, {R.drawable.bread,10}, {R.drawable.salad,11} , {R.drawable.curry,12},
                         {R.drawable.chinese,13}, {R.drawable.maratang,14}, {R.drawable.hotdog,15}, {R.drawable.barbeque,16}, {R.drawable.soup,17}, {R.drawable.bibimbap,18},
                         {R.drawable.dumpling,19}, {R.drawable.ricenoodle,20}, {R.drawable.knifenoodle,21}, {R.drawable.ramen,22}, {R.drawable.porkfeet,23}, {R.drawable.steamedpork,24},
-                        {R.drawable.jjukkumi,25}, {R.drawable.porkcutlet,26}, {R.drawable.kimbap,27}};
+                        {R.drawable.jjukkumi,25}, {R.drawable.porkcutlet,26}, {R.drawable.kimbap,27}, {R.drawable.chickenfeet,28}, {R.drawable.kimchisoup,29},
+                        {R.drawable.potatosoup,30}, {R.drawable.foodpackage,31}, {R.drawable.steamedchicken,32}, {R.drawable.galbisteam,33}};
                 String[] fliptext = {"치킨","피자","떡볶이","백반","햄버거","샌드위치","초밥","스테이크","파스타","빵","샐러드","카레","중국집","마라탕","핫도그","고기","국밥","비빔밥","만두",
-                        "쌀국수","칼국수","라멘","족발","보쌈","쭈꾸미","돈까스","김밥"};
+                        "쌀국수","칼국수","라멘","족발","보쌈","쭈꾸미","돈까스","김밥","닭발","김치찌개","감자탕","도시락","찜닭","갈비찜"};
                 String[] rantext = {"먹어.","어때?","먹자!","먹을까?","고고!","별로야?"};
                 ranimg = (ImageView) findViewById(R.id.ranimage);
                 ranimg.setVisibility(View.INVISIBLE);
