@@ -1,4 +1,4 @@
-# 몰입캠프 1주차 프로젝트
+# 몰입캠프 1주차 프로젝트 "몰입 뭐하지?"
 ## 팀원
 * 정우진
 * 이지원
@@ -6,6 +6,8 @@
 몰입 캠프에 처음와 어쩔줄 몰라하는 우리의 모습에 영감을 받아 이 앱을 제작하게 되었다.
 ```
 ## 몰입 뭐하지? 앱 설명
+<img src=https://user-images.githubusercontent.com/38205047/148054965-6ce525c8-eb5f-497f-9405-babe6e47c477.gif width="180" height="380"/>
+
 ```
 Tab1 - 몰입 캠프를 위한 연락처
 Tab2 - 몰입캠프 추억 기록을 위한 갤러리
@@ -14,6 +16,8 @@ Tab3 - 오늘 먹을 음식을 정해주는 기능과 정산을 위한 3가지 �
 
 ## 탭 상세 설명
 ### 탭1 - 몰입캠프 연락처
+<img src=https://user-images.githubusercontent.com/38205047/148057480-6b5708f3-be46-4505-a359-d041e57c5a5c.jpg width="180" height="380"/>   <img src=https://user-images.githubusercontent.com/38205047/148058277-411039ca-23ba-467a-b841-c07fbe5f6d90.jpg width="180" height="380"/>   <img src=https://user-images.githubusercontent.com/38205047/148058340-de4857b3-b95e-42bc-958a-ed24e7c5b8e1.jpg width="180" height="380"/>   <img src=https://user-images.githubusercontent.com/38205047/148058387-de99adb3-d8f2-4a85-ab45-5d7b6e9b4a91.jpg width="180" height="380"/>   <img src=https://user-images.githubusercontent.com/38205047/148058433-8f6fb0b2-9f5d-42d1-95b8-18e464c17ab1.jpg width="180" height="380"/>
+
 ```
 이 앱의 연락처는 휴대폰의 연락쳐와 분리된 저장소로 운영된다.
 몰입캠프르 위하 연락처 앱으로 각 사람마다 이름, 전화번호, 분반을 저장할 수 있다.
@@ -22,10 +26,11 @@ Tab3 - 오늘 먹을 음식을 정해주는 기능과 정산을 위한 3가지 �
 앱이 실행되면 저장된 연락처들이 불려서 recycler view를 통해 화면에 표시된다.
 각 연락처 옆의 전화 버튼, 메세지 버튼을 누르면 각각 핸드폰의 전화 앱, 메세지 앱을 연결된다.
 각 연락처를 누르면 연락처의 상세 정보를 볼 수 있고 하단의 편집 버튼을 이용해 연락처 정보를 편집할 수 있다.
-......
 ```
 
 ### 탭2 - 몰입캠프 갤러리
+<img src=https://user-images.githubusercontent.com/38205047/148057477-ae1e3f2d-9fce-4d25-bbea-ce812694dd8b.jpg width="180" height="380"/>   <img src=https://user-images.githubusercontent.com/38205047/148059218-e38bafb5-6a32-4834-bb37-6e95730e3415.jpg width="180" height="380"/>   <img src=https://user-images.githubusercontent.com/38205047/148059490-6847b4c1-293a-4301-8135-f5c65d90d0e7.jpg width="180" height="380"/>
+
 ```
 이 갤러리는 몰입캠프 추억을 담기위한 공간이다. 
 탭2 역시도 탭1 과 같이 ROOM을 이용하여 휴대폰의 갤러리와 분리된 저장소로 운영된다.
@@ -37,6 +42,8 @@ Tab3 - 오늘 먹을 음식을 정해주는 기능과 정산을 위한 3가지 �
 ### 탭3 - 오늘 뭐먹지? 정산은 어떡하지?
 
 #### 탭3-1. 오늘 뭐먹지?
+<img src=https://user-images.githubusercontent.com/38205047/148056661-02179c4d-706e-44bb-8831-70b376d4c7c4.gif width="180" height="380"/>
+
 ```
 탭3는 몰입캠프에 온 학생들이 뭘 먹을지 고민을 많이 하는 모습을 보고 만들게 되었다.
 기본적인 컨셉은 배달의 민족의 앱에서 스와이프를 아래로하면 랜덤으로 음식을 정해주는 기능을 모티브로 삼았다.
@@ -45,6 +52,8 @@ Tab3 - 오늘 먹을 음식을 정해주는 기능과 정산을 위한 3가지 �
 링크가 있는 음식점이라면, 음식점 이름을 클릭하면 링크로 이동 할 수 있다.
 ```
 #### 탭3-2. 정산은 어떡하지?
+<img src=https://user-images.githubusercontent.com/38205047/148057222-06c30d79-53cb-4d39-83cf-01340926648f.gif width="180" height="380"/>
+
 ```
 정산은 어떡하지 탭은 재미있게 랜덤으로 정산을 할 수있다.
 기본적으로 처음에 금액과 사람 수를 정할 수 있다.
