@@ -23,9 +23,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Molip">
         <activity
-            android:name=".randomPage.NaverActivity"
-            android:exported="false" />
-        <activity
             android:name=".randomPage.MoneyActivity"
             android:exported="false" />
         <activity
@@ -39,9 +36,6 @@
             android:exported="false" />
         <activity
             android:name=".phonePage.DetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".phonePage.PhoneActivity"
             android:exported="false" />
         <activity
             android:name=".picturePage.ImageDetail"
