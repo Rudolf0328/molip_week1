@@ -104,9 +104,12 @@
         <TextView
             android:id="@+id/item1"
             android:layout_marginLeft="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="1200dp"
             android:textSize="18sp"
+            android:ems="5"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginTop="460dp"/>
 
         <TextView
@@ -124,9 +127,12 @@
         <TextView
             android:id="@+id/item3"
             android:layout_marginLeft="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="1200dp"
             android:textSize="18sp"
+            android:ems="5"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginTop="490dp"/>
 
         <TextView
@@ -144,9 +150,12 @@
         <TextView
             android:id="@+id/item5"
             android:layout_marginLeft="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="1200dp"
             android:textSize="18sp"
+            android:ems="5"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginTop="520dp"/>
 
         <TextView
@@ -164,9 +173,12 @@
         <TextView
             android:id="@+id/item7"
             android:layout_marginLeft="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="1200dp"
             android:textSize="18sp"
+            android:ems="5"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginTop="550dp"/>
 
         <TextView
@@ -184,9 +196,12 @@
         <TextView
             android:id="@+id/item9"
             android:layout_marginLeft="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="1200dp"
             android:textSize="18sp"
+            android:ems="5"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginTop="580dp"/>
 
         <TextView
