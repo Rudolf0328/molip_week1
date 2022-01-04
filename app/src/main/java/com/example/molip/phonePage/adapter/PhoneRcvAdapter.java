@@ -107,13 +107,6 @@ public class PhoneRcvAdapter extends RecyclerView.Adapter<PhoneRcvAdapter.ViewHo
                         .into(imgProfile);
 //                System.out.println(p);
 
-//                TedPermission.with(context.getApplicationContext())
-//                        .setPermissionListener(permissionListener)
-//                        .setRationaleMessage("카메라 권한이 필요합니다.")
-//                        .setDeniedMessage("카메라 권한을 거부하셨습니다.")
-//                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-//                        .check();
-
 //                context.getContentResolver().takePersistableUriPermission(p, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 //                imgProfile.setImageURI(contact.getProfile());
             }

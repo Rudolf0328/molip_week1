@@ -2,15 +2,24 @@ package com.example.molip.phonePage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Messenger;
+import android.provider.DocumentsContract;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.molip.R;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -68,7 +77,30 @@ public class DetailActivity extends AppCompatActivity {
                 int defaultProfile = R.drawable.img_default;
                 imgvProfile.setImageResource(defaultProfile);
             } else {
-                imgvProfile.setImageURI(Uri.parse(profile));
+//                Intent intent1 = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//                intent1.addCategory(Intent.CATEGORY_OPENABLE);
+//                intent1.setType("image/*");
+//
+//                // Optionally, specify a URI for the file that should appear in the
+//                // system file picker when it loads.
+//                intent1.putExtra(DocumentsContract.EXTRA_INITIAL_URI, profile);
+//
+//                startActivityForResult(intent1, 3);
+//                System.out.println("hehehehe" + profile);
+
+//                TedPermission.with(getApplicationContext())
+//                        .setPermissionListener(permissionListener)
+//                        .setRationaleMessage("주소록 권한이 필요합니다.")
+//                        .setDeniedMessage("주소록 권한을 거부하셨습니다.")
+//                        .setPermissions(Intent.ACTION_OPEN_DOCUMENT)
+//                        .check();
+
+//                imgvProfile.setImageURI(Uri.parse(profile));
+//                Uri uri = Uri.parse(profile);
+//                getContentResolver().takePersistableUriPermission(uri, Integer.parseInt(Intent.ACTION_OPEN_DOCUMENT));
+                Glide.with(this)
+                        .load(profile)
+                        .into(imgvProfile);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -99,6 +131,37 @@ public class DetailActivity extends AppCompatActivity {
 //        return v;
     }
 
+    PermissionListener permissionListener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+//            Toast.makeText(getApplicationContext(), "권한이 허용됨", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+//            Toast.makeText(getApplicationContext(), "권한이 허용됨", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+//    @Override
+//    public void onRequestPermissionsResult (int requestCode, String[] permissions, int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        switch (requestCode) {
+//            case General.REQUESTPERMISSION:
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    //reload my activity with permission granted or use the features that required the permission
+//
+//                } else {
+//                    Messenger.makeToast(getContext(), R.string.noPermissionMarshmallow);
+//                }
+//                break;
+//        }
+//    }
+
+//        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//            super.onActivityResult(requestCode, resultCode, data);
+//            imgvProfile.setImageURI(data.getData());
+//        }
 //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        String sName = "error";
 //        String sNumber = "error";
