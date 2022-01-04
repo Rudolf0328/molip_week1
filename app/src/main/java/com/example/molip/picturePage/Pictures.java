@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.molip.R;
@@ -25,7 +24,6 @@ import com.example.molip.picturePage.data.ImageDB;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Pictures extends Fragment {
@@ -105,6 +103,7 @@ public class Pictures extends Fragment {
                     Image newImage = new Image();
                     newImage.setImg(bitmap);
                     System.out.println("wow : " + newImage.getImg());
+
                     ImageDB.getInstance(getContext()).imageDao().insert(newImage);
 //                    picadapter.submitList(imageList);
 //                    System.out.println("dk" + ImageDB.getInstance(getContext()).imageDao().getAll());

@@ -13,7 +13,7 @@ class Converters {
     @TypeConverter
     public byte[] toByteArray(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
         return outputStream.toByteArray();
     }
 
