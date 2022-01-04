@@ -136,11 +136,15 @@ public class MoneyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 num -= 1;
+                tvList.remove(num);
+                etList.remove(num);
+                moneyRcvAdapter.notifyDataSetChanged();
 //                llName.removeAllViews();
-                TextView tv = tvs.get(num);
-                EditText et = ets.get(num);
-                tvs.remove(num);
-                ets.remove(num);
+//                TextView tv = tvs.get(num);
+//                EditText et = ets.get(num);
+//                tvs.remove(num);
+//                ets.remove(num);
+
 //                lls.remove(num);
 //                tvs.remove(num);
 //                moneyRcvAdapter.submitList(tvs, ets, num);
