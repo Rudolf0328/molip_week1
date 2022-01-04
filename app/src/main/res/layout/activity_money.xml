@@ -124,7 +124,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/money_rcv"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="290dp"
         app:layout_constraintBottom_toTopOf="@id/money_btn_go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

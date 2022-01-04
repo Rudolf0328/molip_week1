@@ -303,7 +303,20 @@ public class MoneyActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        rcvMoney.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+//                if (i3 < i7) {
+//                    rcvMoney.setVisibility(View.GONE);
+//                } else {
+//                    rcvMoney.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
     }
+
+
 
     public String toCommaString(String money) {
         String commaMoney = money;
