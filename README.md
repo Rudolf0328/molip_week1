@@ -66,14 +66,37 @@ Tab3 - 오늘 먹을 음식을 정해주는 기능과 정산을 위한 3가지 �
 ```
 
 ## 탭에 사용된 Technique
-### 탭1
+### 탭1 - 몰입캠프 연락처
 ```
-recycler view
+* recycler view
+* ROOM
+* Glide
+* 연락처 권한
 ```
 
-### 탭2
-
-### 탭3
-
-
-
+### 탭2 - 몰입캠프 갤러리
+```
+* recycler view
+* ROOM
+* Glide
+* Photoview
+* 갤러리권한
+* 카메라 권한
+```
+### 탭3 - 오늘 뭐먹지? 정산은 어떡하지?
+```
+* recycler view
+* Naver Search API
+* Animation
+* Random
+* Hyperlink
+```
+## 한줄평
+### 정우진
+```
+처음 접하는 Android Studio라 어려웠지만 짧은 시간에 만족할만한 결과물은 만든것 같아 뿌듯하다.
+```
+### 이지원
+```
+내 잠과 바꾼 소중한 앱...
+```
