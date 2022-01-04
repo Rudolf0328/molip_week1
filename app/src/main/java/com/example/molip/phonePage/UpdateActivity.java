@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -115,35 +116,45 @@ public class UpdateActivity extends AppCompatActivity {
                 String newPhone = etPhone.getText().toString();
                 String newBan = etBan.getText().toString();
 
-                if(id == 9999) {
-                    System.out.println("new");
+                if(newPhone.equals("")) {
+                    newPhone = "?";
+                } else if (newBan.equals("")) {
+                    newBan = "?";
+                }
+
+                if (newName.equals("")) {
+                    Toast.makeText(getApplicationContext(), "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    if (id == 9999) {
+                        System.out.println("new");
 //                String newProfile = imgvProfile.getImageAlpha();
-                    Contact newContact = new Contact();
-                    newContact.setName(newName);
-                    newContact.setPhone(newPhone);
-                    newContact.setBan(newBan);
-                    if (newProfile == null) {
-                        newContact.setProfile("null");
-                    } else {
-                        newContact.setProfile(newProfile.toString());
-                    }
+                        Contact newContact = new Contact();
+                        newContact.setName(newName);
+                        newContact.setPhone(newPhone);
+                        newContact.setBan(newBan);
+                        if (newProfile == null) {
+                            newContact.setProfile("null");
+                        } else {
+                            newContact.setProfile(newProfile.toString());
+                        }
 //                    Glide.with(view)
 //                            .load(newProfile)
 //                            .into(newContact);
 
-                    ContactDB.getInstance(context).contactDAO().insert(newContact);
-                } else {
-                    System.out.println("edit");
-                    Contact contact = ContactDB.getInstance(context).contactDAO().getContact(id);
-                    contact.setName(newName);
-                    contact.setPhone(newPhone);
-                    contact.setBan(newBan);
+                        ContactDB.getInstance(context).contactDAO().insert(newContact);
+                    } else {
+                        System.out.println("edit");
+                        Contact contact = ContactDB.getInstance(context).contactDAO().getContact(id);
+                        contact.setName(newName);
+                        contact.setPhone(newPhone);
+                        contact.setBan(newBan);
 //                    contact.setProfile(newProfile.toString());
-                    System.out.println(contact.toString());
+                        System.out.println(contact.toString());
 
-                    ContactDB.getInstance(context).contactDAO().update(contact);
+                        ContactDB.getInstance(context).contactDAO().update(contact);
 //                    contact.setProfile(newProfile);
-                }
+                    }
 //                Intent intent = new Intent(this, MainActivity.class);
 //                DummyData.dummyList.add(new PhoneData(profile, newName, newPhone));
 //                rcvAdapter = new PhoneRcvAdapter(DummyData.dummyList, getActivity());
@@ -159,7 +170,8 @@ public class UpdateActivity extends AppCompatActivity {
 //                FragmentManager fragmentManager = getSupportFragmentManager();
 //                fragmentManager.beginTransaction().replace(R.id.view_pager, phoneActivity).commit();
 
-                finish();
+                    finish();
+                }
             }
         });
     }
