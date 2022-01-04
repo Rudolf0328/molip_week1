@@ -74,6 +74,7 @@ public class MoneyRcvAdapter extends RecyclerView.Adapter<MoneyRcvAdapter.ViewHo
         System.out.println(holder.tvMoney);
         holder.myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
         holder.etName.setHint(etList.get(position));
+//        holder.etName.setText(etList.get(position));
         holder.tvMoney.setText(tvList.get(position));
         System.out.println(holder.etName.getText());
         System.out.println(holder.tvMoney.getText());
@@ -113,12 +114,14 @@ public class MoneyRcvAdapter extends RecyclerView.Adapter<MoneyRcvAdapter.ViewHo
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             System.out.println("herehere??");
+            etList.remove(position);
             etList.add(position, charSequence.toString());
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
             // no op
+//            etList.add(position, charSequence.toString());
         }
     }
 }
