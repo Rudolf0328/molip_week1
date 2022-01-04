@@ -2,6 +2,7 @@ package com.example.molip.phonePage;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.Manifest;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +26,8 @@ import com.example.molip.phonePage.data.Contact;
 import com.example.molip.phonePage.data.ContactDB;
 import com.example.molip.phonePage.data.DummyData;
 import com.example.molip.phonePage.data.PhoneData;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +64,12 @@ public class PhoneActivity extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TedPermission.with(getContext())
+                        .setPermissionListener(permissionListener)
+                        .setRationaleMessage("주소록 권한이 필요합니다.")
+                        .setDeniedMessage("주소록 권한을 거부하셨습니다.")
+                        .setPermissions(Manifest.permission.READ_CONTACTS)
+                        .check();
                 Intent add = new Intent(Intent.ACTION_PICK);
                 add.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
                 startActivityForResult(add, 0);
@@ -127,4 +137,16 @@ public class PhoneActivity extends Fragment {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    PermissionListener permissionListener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+            Toast.makeText(getContext(), "권한이 허용됨", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+            Toast.makeText(getContext(), "권한이 거부됨", Toast.LENGTH_SHORT).show();
+        }
+    };
 }

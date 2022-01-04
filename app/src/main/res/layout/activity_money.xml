@@ -29,8 +29,8 @@
         android:inputType="number"
         android:textAlignment="textEnd"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
@@ -105,41 +105,32 @@
         app:layout_constraintStart_toEndOf="@+id/money_btn_add"
         app:layout_constraintTop_toBottomOf="@+id/money_btn_good" />
 
-    <LinearLayout
-        android:id="@+id/money_ll_name"
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/money_ll_price"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/money_ll_name"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/money_btn_add">-->
+
+    <!--        &lt;!&ndash;        <TextView&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:id="@+id/textView4"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:text="TextView" />&ndash;&gt;-->
+    <!--    </LinearLayout>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/money_rcv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/money_btn_go"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/money_btn_add">
-
-        <!--        <EditText-->
-        <!--            android:id="@+id/editTextTextPersonName"-->
-        <!--            android:layout_width="250dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginLeft="10dp"-->
-        <!--            android:ems="10"-->
-        <!--            android:hint="Input Name"-->
-        <!--            android:inputType="textPersonName" />-->
-    </LinearLayout>
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/money_ll_price"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/money_ll_name"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/money_btn_add">-->
-
-<!--        &lt;!&ndash;        <TextView&ndash;&gt;-->
-<!--        &lt;!&ndash;            android:id="@+id/textView4"&ndash;&gt;-->
-<!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-<!--        &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
-<!--        &lt;!&ndash;            android:text="TextView" />&ndash;&gt;-->
-<!--    </LinearLayout>-->
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/money_btn_add"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/money_btn_go"

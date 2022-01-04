@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.molip.R;
 
@@ -28,12 +30,18 @@ public class MoneyActivity extends AppCompatActivity {
     TextView tvAvg;
     ImageButton btnGood, btnMid, btnBad;
     Button btnAdd, btnDelete, btnGo;
-    LinearLayout llName;
+//    LinearLayout llName;
+    RecyclerView rcvMoney;
+    MoneyRcvAdapter moneyRcvAdapter;
+
     int num = 0, level = 0, total = 0, avgInt;
     double avgDouble, low = 0, high = 0;
 
     ArrayList<TextView> tvs = new ArrayList<>();
     ArrayList<LinearLayout> lls = new ArrayList<>();
+    ArrayList<EditText> ets = new ArrayList<>();
+    ArrayList<String> etList = new ArrayList<>();
+    ArrayList<String> tvList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +56,11 @@ public class MoneyActivity extends AppCompatActivity {
         btnAdd = (Button) findViewById(R.id.money_btn_add);
         btnDelete = (Button) findViewById(R.id.money_btn_delete);
         btnGo = (Button) findViewById(R.id.money_btn_go);
-        llName = (LinearLayout) findViewById(R.id.money_ll_name);
+        rcvMoney = (RecyclerView) findViewById(R.id.money_rcv);
 
+        rcvMoney.setLayoutManager(new LinearLayoutManager(this));
+        moneyRcvAdapter = new MoneyRcvAdapter(etList, tvList);
+        rcvMoney.setAdapter(moneyRcvAdapter);
         etTotal.addTextChangedListener(new CustomTextWatcher(etTotal));
 
         btnGood.setOnClickListener(new View.OnClickListener() {
@@ -86,29 +97,38 @@ public class MoneyActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText et = new EditText(getApplicationContext());
-                TextView tv = new TextView(getApplicationContext());
-                LinearLayout ll = new LinearLayout(getApplicationContext());
-                LinearLayout.LayoutParams p1 = new LinearLayout.LayoutParams(650, ViewGroup.LayoutParams.WRAP_CONTENT);
-                LinearLayout.LayoutParams p2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                et.setLayoutParams(p1);
-                et.setHint("이름을 입력하세요.");
-                p2.setMargins(30, 0, 0, 0);
-                tv.setLayoutParams(p2);
-//                tv.setTextColor(Integer.parseInt("#FFFFFF"));
-                tv.setTextColor(Color.parseColor("#000000"));
-                tv.setTextSize(18);
-                tv.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
-//                tv.setText("0");
-                tvs.add(tv);
-                ll.setOrientation(LinearLayout.HORIZONTAL);
-                ll.addView(et);
-                ll.addView(tv);
-                et.setId(num);
-                tv.setId(num);
-                llName.addView(ll);
-                lls.add(ll);
+//                EditText et = new EditText(getApplicationContext());
+//                TextView tv = new TextView(getApplicationContext());
+//                LinearLayout ll = new LinearLayout(getApplicationContext());
+//                LinearLayout.LayoutParams p1 = new LinearLayout.LayoutParams(650, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                LinearLayout.LayoutParams p2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                et.setLayoutParams(p1);
+//                et.setHint("이름을 입력하세요.");
+//                p2.setMargins(30, 0, 0, 0);
+//                tv.setLayoutParams(p2);
+////                tv.setTextColor(Integer.parseInt("#FFFFFF"));
+//                tv.setTextColor(Color.parseColor("#000000"));
+//                tv.setTextSize(18);
+//                tv.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+////                tv.setText("0");
+//                tvs.add(tv);
+//                ets.add(et);
+//                ll.setOrientation(LinearLayout.HORIZONTAL);
+//                ll.addView(et);
+//                ll.addView(tv);
+//                et.setId(num);
+//                tv.setId(num);
+////                llName.addView(ll);
+//                lls.add(ll);
+//                moneyRcvAdapter.submitList(ets, tvs, num);
+//                num += 1;
+
+                etList.add(num, "이름을 입력하세요.");
+                tvList.add(num, "0원");
                 num += 1;
+//                moneyRcvAdapter = new MoneyRcvAdapter(etList);
+                moneyRcvAdapter.notifyDataSetChanged();
+//                moneyRcvAdapter(etList);
             }
         });
 
@@ -116,13 +136,18 @@ public class MoneyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 num -= 1;
-                llName.removeAllViews();
-                lls.remove(num);
+//                llName.removeAllViews();
+                TextView tv = tvs.get(num);
+                EditText et = ets.get(num);
                 tvs.remove(num);
+                ets.remove(num);
+//                lls.remove(num);
+//                tvs.remove(num);
+//                moneyRcvAdapter.submitList(tvs, ets, num);
 
-                for (int i = 0; i < num; i++) {
-                    llName.addView(lls.get(i));
-                }
+//                for (int i = 0; i < num; i++) {
+//                    llName.addView(lls.get(i));
+//                }
             }
         });
 
@@ -261,11 +286,52 @@ public class MoneyActivity extends AppCompatActivity {
 
                         for (int i = 0; i < num; i++) {
                             String priceText = prices.get(i) + "원";
-                            tvs.get(i).setText(priceText);
+                            System.out.println("--------------here here here here here---------------");
+                            priceText = toCommaString(priceText);
+//                            tvList.remove(i);
+                            tvList.add(i, priceText);
+//                            tvs.get(i).setText(priceText);
                         }
+                        moneyRcvAdapter.notifyDataSetChanged();
+
+
                     }
                 }
             }
         });
+    }
+
+    public String toCommaString(String money) {
+        String commaMoney = money;
+        int length = money.length();
+        System.out.println(length);
+
+        if (length < 5) {
+            //zero comma
+            commaMoney = money;
+        } else if (length >= 5 && length < 8) {
+            // one comma
+            String tmp = money;
+            String tmp2 = money;
+            String ap = tmp.substring(0, length - 4);
+            System.out.println(ap);
+            String dui = tmp2.substring(length - 4, length);
+            System.out.println(dui);
+            commaMoney = ap + "," + dui;
+        } else {
+            //two comma
+            String tmp = money;
+            String tmp2 = money;
+            String tmp3 = money;
+            String ap = tmp.substring(0, length - 7);
+            System.out.println(ap);
+            String jung = tmp2.substring(length - 7, length - 4);
+            System.out.println(jung);
+            String dui = tmp3.substring(length - 4, length);
+            System.out.println(dui);
+            commaMoney = ap + "," + jung + "," + dui;
+        }
+
+        return commaMoney;
     }
 }
